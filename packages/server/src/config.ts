@@ -40,7 +40,7 @@ const schema = {
         database: {
             env: 'DB_DATABASE',
             arg: 'database',
-            default: 'ystu_staq',
+            default: 'info_agency',
         },
     }
 };

@@ -1,20 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserRole = void 0;
+exports.ContentStatus = exports.UserRole = void 0;
 var UserRole;
 (function (UserRole) {
-    UserRole[UserRole["NONE"] = 1] = "NONE";
-    UserRole[UserRole["USER"] = 2] = "USER";
-    UserRole[UserRole["STUDENT"] = 4] = "STUDENT";
-    UserRole[UserRole["TEACHER"] = 8] = "TEACHER";
-    UserRole[UserRole["DEKAN"] = 16] = "DEKAN";
-    UserRole[UserRole["ADMIN"] = 32] = "ADMIN";
+    UserRole[UserRole["NONE"] = 0] = "NONE";
+    UserRole[UserRole["ADMIN"] = 1] = "ADMIN";
+    UserRole[UserRole["AGENT"] = 2] = "AGENT";
+    UserRole[UserRole["VISITOR"] = 3] = "VISITOR";
 })(UserRole = exports.UserRole || (exports.UserRole = {}));
-/*
-    ('Никто', 1)
-    ('Пользователь', 2)
-    ('Студент', 4)
-    ('Преподаватель', 8)
-    ('Деканат', 16)
-    ('Администратор', 32)
-*/ 
+// Article, Item, etc.
+var ContentStatus;
+(function (ContentStatus) {
+    ContentStatus[ContentStatus["MODERATION"] = 1] = "MODERATION";
+    ContentStatus[ContentStatus["PUBLISHED"] = 2] = "PUBLISHED";
+    ContentStatus[ContentStatus["DELETED"] = 3] = "DELETED";
+    ContentStatus[ContentStatus["DRAFT"] = 4] = "DRAFT";
+})(ContentStatus = exports.ContentStatus || (exports.ContentStatus = {}));

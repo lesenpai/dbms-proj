@@ -12,6 +12,7 @@ async function main() {
     app.listen(port, () => {
         console.log(`API url is http://127.0.0.1:${port}/api`);
     });
+    // console.log(`port: ${port}`);
 }
 
 main().catch((e) => log.error(e));

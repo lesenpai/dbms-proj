@@ -1,159 +1,152 @@
-import type { Sequelize } from 'sequelize';
-import { auditory } from './auditory';
-import type { auditoryAttributes, auditoryCreationAttributes } from './auditory';
-import { group } from './group';
-import type { groupAttributes, groupCreationAttributes } from './group';
-import { headman2group } from './headman2group';
-import type { headman2groupAttributes, headman2groupCreationAttributes } from './headman2group';
-import { kafedra } from './kafedra';
-import type { kafedraAttributes, kafedraCreationAttributes } from './kafedra';
-import { lesson } from './lesson';
-import type { lessonAttributes, lessonCreationAttributes } from './lesson';
-import { mark } from './mark';
-import type { markAttributes, markCreationAttributes } from './mark';
-import { mark_log } from './mark_log';
-import type { mark_logAttributes, mark_logCreationAttributes } from './mark_log';
-import { notify_schedule } from './notify_schedule';
-import type { notify_scheduleAttributes, notify_scheduleCreationAttributes } from './notify_schedule';
-import { role } from './role';
-import type { roleAttributes, roleCreationAttributes } from './role';
-import { schedule } from './schedule';
-import type { scheduleAttributes, scheduleCreationAttributes } from './schedule';
-import { specialty } from './specialty';
-import type { specialtyAttributes, specialtyCreationAttributes } from './specialty';
-import { student } from './student';
-import type { studentAttributes, studentCreationAttributes } from './student';
-import { teacher } from './teacher';
-import type { teacherAttributes, teacherCreationAttributes } from './teacher';
-import { teacher2lesson } from './teacher2lesson';
-import type { teacher2lessonAttributes, teacher2lessonCreationAttributes } from './teacher2lesson';
-import { user } from './user';
-import type { userAttributes, userCreationAttributes } from './user';
+import type { Sequelize, Model } from "sequelize";
+import { Activity } from "./Activity";
+import type { ActivityAttributes, ActivityCreationAttributes } from "./Activity";
+import { Admin } from "./Admin";
+import type { AdminAttributes, AdminCreationAttributes } from "./Admin";
+import { Agent } from "./Agent";
+import type { AgentAttributes, AgentCreationAttributes } from "./Agent";
+import { Agent_Password_Changelog } from "./Agent_Password_Changelog";
+import type { Agent_Password_ChangelogAttributes, Agent_Password_ChangelogCreationAttributes } from "./Agent_Password_Changelog";
+import { Article } from "./Article";
+import type { ArticleAttributes, ArticleCreationAttributes } from "./Article";
+import { Company } from "./Company";
+import type { CompanyAttributes, CompanyCreationAttributes } from "./Company";
+import { Company2Activity } from "./Company2Activity";
+import type { Company2ActivityAttributes, Company2ActivityCreationAttributes } from "./Company2Activity";
+import { Company2Item } from "./Company2Item";
+import type { Company2ItemAttributes, Company2ItemCreationAttributes } from "./Company2Item";
+import { Email } from "./Email";
+import type { EmailAttributes, EmailCreationAttributes } from "./Email";
+import { Item } from "./Item";
+import type { ItemAttributes, ItemCreationAttributes } from "./Item";
+import { ItemCategory } from "./ItemCategory";
+import type { ItemCategoryAttributes, ItemCategoryCreationAttributes } from "./ItemCategory";
+import { ItemType } from "./ItemType";
+import type { ItemTypeAttributes, ItemTypeCreationAttributes } from "./ItemType";
+import { OpeningHoursPeriod } from "./OpeningHoursPeriod";
+import type { OpeningHoursPeriodAttributes, OpeningHoursPeriodCreationAttributes } from "./OpeningHoursPeriod";
+import { Phone } from "./Phone";
+import type { PhoneAttributes, PhoneCreationAttributes } from "./Phone";
+import { Role } from "./Role";
+import type { RoleAttributes, RoleCreationAttributes } from "./Role";
+import { User } from "./User";
+import type { UserAttributes, UserCreationAttributes } from "./User";
 
 export {
-    auditory,
-    group,
-    headman2group,
-    kafedra,
-    lesson,
-    mark,
-    mark_log,
-    notify_schedule,
-    role,
-    schedule,
-    specialty,
-    student,
-    teacher,
-    teacher2lesson,
-    user,
+  Activity,
+  Admin,
+  Agent,
+  Agent_Password_Changelog,
+  Article,
+  Company,
+  Company2Activity,
+  Company2Item,
+  Email,
+  Item,
+  ItemCategory,
+  ItemType,
+  OpeningHoursPeriod,
+  Phone,
+  Role,
+  User,
 };
 
 export type {
-    auditoryAttributes,
-    auditoryCreationAttributes,
-    groupAttributes,
-    groupCreationAttributes,
-    headman2groupAttributes,
-    headman2groupCreationAttributes,
-    kafedraAttributes,
-    kafedraCreationAttributes,
-    lessonAttributes,
-    lessonCreationAttributes,
-    markAttributes,
-    markCreationAttributes,
-    mark_logAttributes,
-    mark_logCreationAttributes,
-    notify_scheduleAttributes,
-    notify_scheduleCreationAttributes,
-    roleAttributes,
-    roleCreationAttributes,
-    scheduleAttributes,
-    scheduleCreationAttributes,
-    specialtyAttributes,
-    specialtyCreationAttributes,
-    studentAttributes,
-    studentCreationAttributes,
-    teacherAttributes,
-    teacherCreationAttributes,
-    teacher2lessonAttributes,
-    teacher2lessonCreationAttributes,
-    userAttributes,
-    userCreationAttributes,
+  ActivityAttributes,
+  ActivityCreationAttributes,
+  AdminAttributes,
+  AdminCreationAttributes,
+  AgentAttributes,
+  AgentCreationAttributes,
+  Agent_Password_ChangelogAttributes,
+  Agent_Password_ChangelogCreationAttributes,
+  ArticleAttributes,
+  ArticleCreationAttributes,
+  CompanyAttributes,
+  CompanyCreationAttributes,
+  Company2ActivityAttributes,
+  Company2ActivityCreationAttributes,
+  Company2ItemAttributes,
+  Company2ItemCreationAttributes,
+  EmailAttributes,
+  EmailCreationAttributes,
+  ItemAttributes,
+  ItemCreationAttributes,
+  ItemCategoryAttributes,
+  ItemCategoryCreationAttributes,
+  ItemTypeAttributes,
+  ItemTypeCreationAttributes,
+  OpeningHoursPeriodAttributes,
+  OpeningHoursPeriodCreationAttributes,
+  PhoneAttributes,
+  PhoneCreationAttributes,
+  RoleAttributes,
+  RoleCreationAttributes,
+  UserAttributes,
+  UserCreationAttributes,
 };
 
 export function initModels(sequelize: Sequelize) {
-    auditory.initModel(sequelize);
-    group.initModel(sequelize);
-    headman2group.initModel(sequelize);
-    kafedra.initModel(sequelize);
-    lesson.initModel(sequelize);
-    mark.initModel(sequelize);
-    mark_log.initModel(sequelize);
-    notify_schedule.initModel(sequelize);
-    role.initModel(sequelize);
-    schedule.initModel(sequelize);
-    specialty.initModel(sequelize);
-    student.initModel(sequelize);
-    teacher.initModel(sequelize);
-    teacher2lesson.initModel(sequelize);
-    user.initModel(sequelize);
+  Activity.initModel(sequelize);
+  Admin.initModel(sequelize);
+  Agent.initModel(sequelize);
+  Agent_Password_Changelog.initModel(sequelize);
+  Article.initModel(sequelize);
+  Company.initModel(sequelize);
+  Company2Activity.initModel(sequelize);
+  Company2Item.initModel(sequelize);
+  Email.initModel(sequelize);
+  Item.initModel(sequelize);
+  ItemCategory.initModel(sequelize);
+  ItemType.initModel(sequelize);
+  OpeningHoursPeriod.initModel(sequelize);
+  Phone.initModel(sequelize);
+  Role.initModel(sequelize);
+  User.initModel(sequelize);
 
-    group.belongsTo(specialty, { foreignKey: 'specialty_id' });
-    specialty.hasMany(group, { foreignKey: 'specialty_id' });
-    headman2group.belongsTo(group, { foreignKey: 'group_id' });
-    group.hasMany(headman2group, { foreignKey: 'group_id' });
-    headman2group.belongsTo(student, { foreignKey: 'student_id' });
-    student.hasMany(headman2group, { foreignKey: 'student_id' });
-    mark.belongsTo(schedule, { foreignKey: 'schedule_id' });
-    schedule.hasMany(mark, { foreignKey: 'schedule_id' });
-    mark.belongsTo(student, { foreignKey: 'student_id' });
-    student.hasMany(mark, { foreignKey: 'student_id' });
-    mark_log.belongsTo(mark, { foreignKey: 'mark_id' });
-    mark.hasMany(mark_log, { foreignKey: 'mark_id' });
-    notify_schedule.belongsTo(user, { foreignKey: 'peer_id' });
-    user.hasMany(notify_schedule, { foreignKey: 'peer_id' });
-    notify_schedule.belongsTo(schedule, { foreignKey: 'schedule_id' });
-    schedule.hasMany(notify_schedule, { foreignKey: 'schedule_id' });
-    notify_schedule.belongsTo(user, { foreignKey: 'sender_id' });
-    user.hasMany(notify_schedule, { foreignKey: 'sender_id' });
-    schedule.belongsTo(auditory, { foreignKey: 'auditory_id' });
-    auditory.hasMany(schedule, { foreignKey: 'auditory_id' });
-    schedule.belongsTo(group, { foreignKey: 'group_id' });
-    group.hasMany(schedule, { foreignKey: 'group_id' });
-    schedule.belongsTo(lesson, { foreignKey: 'lesson_id' });
-    lesson.hasMany(schedule, { foreignKey: 'lesson_id' });
-    schedule.belongsTo(teacher, { foreignKey: 'teacher_id' });
-    teacher.hasMany(schedule, { foreignKey: 'teacher_id' });
-    specialty.belongsTo(kafedra, { foreignKey: 'kafedra_id' });
-    kafedra.hasMany(specialty, { foreignKey: 'kafedra_id' });
-    student.belongsTo(group, { foreignKey: 'group_id' });
-    group.hasMany(student, { foreignKey: 'group_id' });
-    student.belongsTo(user, { foreignKey: 'user_id' });
-    user.hasOne(student, { foreignKey: 'user_id' });
-    teacher.belongsTo(user, { foreignKey: 'user_id' });
-    user.hasOne(teacher, { foreignKey: 'user_id' });
-    teacher2lesson.belongsTo(lesson, { foreignKey: 'lesson_id' });
-    lesson.hasMany(teacher2lesson, { foreignKey: 'lesson_id' });
-    teacher2lesson.belongsTo(teacher, { foreignKey: 'teacher_id' });
-    teacher.hasMany(teacher2lesson, { foreignKey: 'teacher_id' });
-    user.belongsTo(role, { foreignKey: 'role_id' });
-    role.hasMany(user, { foreignKey: 'role_id' });
+  Admin.belongsTo(User, { foreignKey: "user_id"});
+  User.hasMany(Admin, { foreignKey: "user_id"});
+  Agent.belongsTo(User, { foreignKey: "user_id"});
+  User.hasMany(Agent, { foreignKey: "user_id"});
+  Company2Activity.belongsTo(Activity, { foreignKey: "activity_id"});
+  Activity.hasMany(Company2Activity, { foreignKey: "activity_id"});
+  Company2Activity.belongsTo(Company, { foreignKey: "company_id"});
+  Company.hasMany(Company2Activity, { foreignKey: "company_id"});
+  Company2Item.belongsTo(Company, { foreignKey: "company_id"});
+  Company.hasMany(Company2Item, { foreignKey: "company_id"});
+  Company2Item.belongsTo(Item, { foreignKey: "item_id"});
+  Item.hasMany(Company2Item, { foreignKey: "item_id"});
+  Email.belongsTo(Company, { foreignKey: "company_id"});
+  Company.hasMany(Email, { foreignKey: "company_id"});
+  Item.belongsTo(ItemCategory, { foreignKey: "category_id"});
+  ItemCategory.hasMany(Item, { foreignKey: "category_id"});
+  Item.belongsTo(ItemType, { foreignKey: "item_type_id"});
+  ItemType.hasMany(Item, { foreignKey: "item_type_id"});
+  ItemCategory.belongsTo(ItemCategory, { foreignKey: "parent_id"});
+  ItemCategory.hasMany(ItemCategory, { foreignKey: "parent_id"});
+  OpeningHoursPeriod.belongsTo(Company, { foreignKey: "company_id"});
+  Company.hasMany(OpeningHoursPeriod, { foreignKey: "company_id"});
+  Phone.belongsTo(Company, { foreignKey: "company_id"});
+  Company.hasMany(Phone, { foreignKey: "company_id"});
+  User.belongsTo(Role, { foreignKey: "role_id"});
+  Role.hasMany(User, { foreignKey: "role_id"});
 
-    return {
-        auditory: auditory,
-        group: group,
-        headman2group: headman2group,
-        kafedra: kafedra,
-        lesson: lesson,
-        mark: mark,
-        mark_log: mark_log,
-        notify_schedule: notify_schedule,
-        role: role,
-        schedule: schedule,
-        specialty: specialty,
-        student: student,
-        teacher: teacher,
-        teacher2lesson: teacher2lesson,
-        user: user,
-    };
+  return {
+    Activity: Activity,
+    Admin: Admin,
+    Agent: Agent,
+    Agent_Password_Changelog: Agent_Password_Changelog,
+    Article: Article,
+    Company: Company,
+    Company2Activity: Company2Activity,
+    Company2Item: Company2Item,
+    Email: Email,
+    Item: Item,
+    ItemCategory: ItemCategory,
+    ItemType: ItemType,
+    OpeningHoursPeriod: OpeningHoursPeriod,
+    Phone: Phone,
+    Role: Role,
+    User: User,
+  };
 }

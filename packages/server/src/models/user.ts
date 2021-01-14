@@ -1,150 +1,144 @@
 import Sequelize, { DataTypes, Model, Optional } from 'sequelize';
-import type { notify_schedule, notify_scheduleId } from './notify_schedule';
-import type { role, roleId } from './role';
-import type { student, studentCreationAttributes, studentId } from './student';
-import type { teacher, teacherCreationAttributes, teacherId } from './teacher';
+import type { Admin, AdminId } from './Admin';
+import type { Agent, AgentId } from './Agent';
+import type { Role, RoleId } from './Role';
 
-export interface userAttributes {
-    id: number;
-    login: string;
-    password: string;
-    photo_path?: string;
-    name: string;
-    last_name: string;
-    second_name?: string;
-    personal_address: string;
-    personal_telephone: string;
-    personal_birthday: string;
-    registeration_date: string;
-    role_id: number;
+export interface UserAttributes {
+  id: number;
+  login: string;
+  password: string;
+  surname: string;
+  name: string;
+  patronym?: string;
+  dob: string;
+  phone: string;
+  email: string;
+  photo_path?: string;
+  role_id?: number;
 }
 
-export type userPk = 'id';
-export type userId = user[userPk];
-export type userCreationAttributes = Optional<userAttributes, userPk>;
+export type UserPk = "id";
+export type UserId = User[UserPk];
+export type UserCreationAttributes = Optional<UserAttributes, UserPk>;
 
-export class user extends Model<userAttributes, userCreationAttributes> implements userAttributes {
-    id!: number;
-    login!: string;
-    password!: string;
-    photo_path?: string;
-    name!: string;
-    last_name!: string;
-    second_name?: string;
-    personal_address!: string;
-    personal_telephone!: string;
-    personal_birthday!: string;
-    registeration_date!: string;
-    role_id!: number;
+export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+  id!: number;
+  login!: string;
+  password!: string;
+  surname!: string;
+  name!: string;
+  patronym?: string;
+  dob!: string;
+  phone!: string;
+  email!: string;
+  photo_path?: string;
+  role_id?: number;
 
-    // user hasMany notify_schedule
-    notify_schedules!: notify_schedule[];
-    getnotify_schedules!: Sequelize.HasManyGetAssociationsMixin<notify_schedule>;
-    setnotify_schedules!: Sequelize.HasManySetAssociationsMixin<notify_schedule, notify_scheduleId>;
-    addnotify_schedule!: Sequelize.HasManyAddAssociationMixin<notify_schedule, notify_scheduleId>;
-    addnotify_schedules!: Sequelize.HasManyAddAssociationsMixin<notify_schedule, notify_scheduleId>;
-    createnotify_schedule!: Sequelize.HasManyCreateAssociationMixin<notify_schedule>;
-    removenotify_schedule!: Sequelize.HasManyRemoveAssociationMixin<notify_schedule, notify_scheduleId>;
-    removenotify_schedules!: Sequelize.HasManyRemoveAssociationsMixin<notify_schedule, notify_scheduleId>;
-    hasnotify_schedule!: Sequelize.HasManyHasAssociationMixin<notify_schedule, notify_scheduleId>;
-    hasnotify_schedules!: Sequelize.HasManyHasAssociationsMixin<notify_schedule, notify_scheduleId>;
-    countnotify_schedules!: Sequelize.HasManyCountAssociationsMixin;
+  // User hasMany Admin
+  Admins!: Admin[];
+  getAdmins!: Sequelize.HasManyGetAssociationsMixin<Admin>;
+  setAdmins!: Sequelize.HasManySetAssociationsMixin<Admin, AdminId>;
+  addAdmin!: Sequelize.HasManyAddAssociationMixin<Admin, AdminId>;
+  addAdmins!: Sequelize.HasManyAddAssociationsMixin<Admin, AdminId>;
+  createAdmin!: Sequelize.HasManyCreateAssociationMixin<Admin>;
+  removeAdmin!: Sequelize.HasManyRemoveAssociationMixin<Admin, AdminId>;
+  removeAdmins!: Sequelize.HasManyRemoveAssociationsMixin<Admin, AdminId>;
+  hasAdmin!: Sequelize.HasManyHasAssociationMixin<Admin, AdminId>;
+  hasAdmins!: Sequelize.HasManyHasAssociationsMixin<Admin, AdminId>;
+  countAdmins!: Sequelize.HasManyCountAssociationsMixin;
+  // User hasMany Agent
+  Agents!: Agent[];
+  getAgents!: Sequelize.HasManyGetAssociationsMixin<Agent>;
+  setAgents!: Sequelize.HasManySetAssociationsMixin<Agent, AgentId>;
+  addAgent!: Sequelize.HasManyAddAssociationMixin<Agent, AgentId>;
+  addAgents!: Sequelize.HasManyAddAssociationsMixin<Agent, AgentId>;
+  createAgent!: Sequelize.HasManyCreateAssociationMixin<Agent>;
+  removeAgent!: Sequelize.HasManyRemoveAssociationMixin<Agent, AgentId>;
+  removeAgents!: Sequelize.HasManyRemoveAssociationsMixin<Agent, AgentId>;
+  hasAgent!: Sequelize.HasManyHasAssociationMixin<Agent, AgentId>;
+  hasAgents!: Sequelize.HasManyHasAssociationsMixin<Agent, AgentId>;
+  countAgents!: Sequelize.HasManyCountAssociationsMixin;
+  // User belongsTo Role
+  Role!: Role;
+  getRole!: Sequelize.BelongsToGetAssociationMixin<Role>;
+  setRole!: Sequelize.BelongsToSetAssociationMixin<Role, RoleId>;
+  createRole!: Sequelize.BelongsToCreateAssociationMixin<Role>;
 
-    // user hasOne student
-    student!: student;
-    getstudent!: Sequelize.HasOneGetAssociationMixin<student>;
-    setstudent!: Sequelize.HasOneSetAssociationMixin<student, studentId>;
-    createstudent!: Sequelize.HasOneCreateAssociationMixin<studentCreationAttributes>;
-    // user hasOne teacher
-    teacher!: teacher;
-    getteacher!: Sequelize.HasOneGetAssociationMixin<teacher>;
-    setteacher!: Sequelize.HasOneSetAssociationMixin<teacher, teacherId>;
-    createteacher!: Sequelize.HasOneCreateAssociationMixin<teacherCreationAttributes>;
-    // user belongsTo role
-    role!: role;
-    getrole!: Sequelize.BelongsToGetAssociationMixin<role>;
-    setrole!: Sequelize.BelongsToSetAssociationMixin<role, roleId>;
-    createrole!: Sequelize.BelongsToCreateAssociationMixin<role>;
-
-    static initModel(sequelize: Sequelize.Sequelize): typeof user {
-        user.init(
-            {
-                id: {
-                    autoIncrement: true,
-                    type: DataTypes.INTEGER,
-                    allowNull: false,
-                    primaryKey: true,
-                },
-                login: {
-                    type: DataTypes.STRING(100),
-                    allowNull: false,
-                    unique: 'UQ__user__7838F27276E0F2A5',
-                },
-                password: {
-                    type: DataTypes.STRING(255),
-                    allowNull: false,
-                },
-                photo_path: {
-                    type: DataTypes.STRING(255),
-                    allowNull: true,
-                },
-                name: {
-                    type: DataTypes.STRING(100),
-                    allowNull: false,
-                },
-                last_name: {
-                    type: DataTypes.STRING(100),
-                    allowNull: false,
-                },
-                second_name: {
-                    type: DataTypes.STRING(100),
-                    allowNull: true,
-                },
-                personal_address: {
-                    type: DataTypes.STRING(255),
-                    allowNull: false,
-                },
-                personal_telephone: {
-                    type: DataTypes.STRING(16),
-                    allowNull: false,
-                },
-                personal_birthday: {
-                    type: DataTypes.DATEONLY,
-                    allowNull: false,
-                },
-                registeration_date: {
-                    type: DataTypes.DATEONLY,
-                    allowNull: false,
-                    defaultValue: Sequelize.fn('getdate'),
-                },
-                role_id: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false,
-                    references: {
-                        model: 'role',
-                        key: 'id',
-                    },
-                },
-            },
-            {
-                sequelize,
-                tableName: 'user',
-                schema: 'dbo',
-                timestamps: false,
-                indexes: [
-                    {
-                        name: 'PK__user__3213E83FD6237DD8',
-                        unique: true,
-                        fields: [{ name: 'id' }],
-                    },
-                    {
-                        name: 'UQ__user__7838F27276E0F2A5',
-                        unique: true,
-                        fields: [{ name: 'login' }],
-                    },
-                ],
-            }
-        );
-        return user;
+  static initModel(sequelize: Sequelize.Sequelize): typeof User {
+    User.init({
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
+    },
+    login: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+      unique: "UQ__User__7838F2728F565592"
+    },
+    password: {
+      type: DataTypes.STRING(128),
+      allowNull: false
+    },
+    surname: {
+      type: DataTypes.STRING(30),
+      allowNull: false
+    },
+    name: {
+      type: DataTypes.STRING(30),
+      allowNull: false
+    },
+    patronym: {
+      type: DataTypes.STRING(30),
+      allowNull: true
+    },
+    dob: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    phone: {
+      type: DataTypes.STRING(11),
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING(320),
+      allowNull: false
+    },
+    photo_path: {
+      type: DataTypes.STRING(256),
+      allowNull: true
+    },
+    role_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'Role',
+        key: 'id'
+      }
     }
+  }, {
+    sequelize,
+    tableName: 'User',
+    schema: 'dbo',
+    timestamps: false,
+    indexes: [
+      {
+        name: "PK__User__3213E83FEBF2DC13",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
+      {
+        name: "UQ__User__7838F2728F565592",
+        unique: true,
+        fields: [
+          { name: "login" },
+        ]
+      },
+    ]
+  });
+  return User;
+  }
 }

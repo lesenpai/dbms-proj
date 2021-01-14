@@ -4,6 +4,7 @@ import Boom from '@hapi/boom';
 import { authType } from '../../tools/auth';
 import { UserController, IUserJSON } from '../../controllers/user.controller';
 import { log } from '../../tools/logger';
+import { AdminController } from '../../controllers/admin.controller';
 
 const router = Router();
 
@@ -31,21 +32,32 @@ router.get('/initAdmin', authType.optional, async (req, res, next) => {
     try {
         const user = await UserController.model.findOne({ where: { login: 'admin' } });
         log.debug('user', user);
-        
+
         if (!user) {
             const newUser = await UserController.register({
                 login: 'admin',
                 password: '123456',
-                name: 'Admin',
-                last_name: 'Forks',
-                personal_address: 'addr',
-                personal_telephone: '+0',
-                personal_birthday: new Date('06.06.2000').toISOString(),
-                registeration_date: new Date(Date.now()).toISOString(),
-                role_id: 6,
+                name: 'Lev',
+                surname: 'Platonov',
+                dob: new Date('12.07.2000').toISOString(),
+                phone: '+0',
+                email: 'mail@example.com',
+                role_id: 1,
             });
-
             log.debug('new user', newUser);
+
+            const newAdmin = await AdminController.doCreate({
+                // passport_ser: '',
+                // passport_id: ,
+                // country: ,
+                // city: ,
+                // street: ,
+                // building: ,
+                // flat: ,
+                user_id: newUser.id
+            });
+            log.debug('new admin', newAdmin);
+
             res.jsongo(UserController.toAuthJSON(newUser));
         } else {
             res.jsongo({ already: true });

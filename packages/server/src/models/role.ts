@@ -1,36 +1,34 @@
 import Sequelize, { DataTypes, Model, Optional } from 'sequelize';
-import type { user, userId } from './user';
+import type { User, UserId } from './User';
 
-export interface roleAttributes {
+export interface RoleAttributes {
   id: number;
   name: string;
-  role: number;
 }
 
-export type rolePk = "id";
-export type roleId = role[rolePk];
-export type roleCreationAttributes = Optional<roleAttributes, rolePk>;
+export type RolePk = "id";
+export type RoleId = Role[RolePk];
+export type RoleCreationAttributes = Optional<RoleAttributes, RolePk>;
 
-export class role extends Model<roleAttributes, roleCreationAttributes> implements roleAttributes {
+export class Role extends Model<RoleAttributes, RoleCreationAttributes> implements RoleAttributes {
   id!: number;
   name!: string;
-  role!: number;
 
-  // role hasMany user
-  users!: user[];
-  getusers!: Sequelize.HasManyGetAssociationsMixin<user>;
-  setusers!: Sequelize.HasManySetAssociationsMixin<user, userId>;
-  adduser!: Sequelize.HasManyAddAssociationMixin<user, userId>;
-  addusers!: Sequelize.HasManyAddAssociationsMixin<user, userId>;
-  createuser!: Sequelize.HasManyCreateAssociationMixin<user>;
-  removeuser!: Sequelize.HasManyRemoveAssociationMixin<user, userId>;
-  removeusers!: Sequelize.HasManyRemoveAssociationsMixin<user, userId>;
-  hasuser!: Sequelize.HasManyHasAssociationMixin<user, userId>;
-  hasusers!: Sequelize.HasManyHasAssociationsMixin<user, userId>;
-  countusers!: Sequelize.HasManyCountAssociationsMixin;
+  // Role hasMany User
+  Users!: User[];
+  getUsers!: Sequelize.HasManyGetAssociationsMixin<User>;
+  setUsers!: Sequelize.HasManySetAssociationsMixin<User, UserId>;
+  addUser!: Sequelize.HasManyAddAssociationMixin<User, UserId>;
+  addUsers!: Sequelize.HasManyAddAssociationsMixin<User, UserId>;
+  createUser!: Sequelize.HasManyCreateAssociationMixin<User>;
+  removeUser!: Sequelize.HasManyRemoveAssociationMixin<User, UserId>;
+  removeUsers!: Sequelize.HasManyRemoveAssociationsMixin<User, UserId>;
+  hasUser!: Sequelize.HasManyHasAssociationMixin<User, UserId>;
+  hasUsers!: Sequelize.HasManyHasAssociationsMixin<User, UserId>;
+  countUsers!: Sequelize.HasManyCountAssociationsMixin;
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof role {
-    role.init({
+  static initModel(sequelize: Sequelize.Sequelize): typeof Role {
+    Role.init({
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -38,21 +36,17 @@ export class role extends Model<roleAttributes, roleCreationAttributes> implemen
       primaryKey: true
     },
     name: {
-      type: DataTypes.STRING(255),
-      allowNull: false
-    },
-    role: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(30),
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'role',
+    tableName: 'Role',
     schema: 'dbo',
     timestamps: false,
     indexes: [
       {
-        name: "PK__role__3213E83F6A743188",
+        name: "PK__Role__3213E83F1678E39D",
         unique: true,
         fields: [
           { name: "id" },
@@ -60,6 +54,6 @@ export class role extends Model<roleAttributes, roleCreationAttributes> implemen
       },
     ]
   });
-  return role;
+  return Role;
   }
 }

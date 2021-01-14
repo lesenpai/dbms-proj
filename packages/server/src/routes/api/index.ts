@@ -7,10 +7,13 @@ import authRoute from './auth';
 import imagesRoute from './images';
 
 import { UserController } from '../../controllers/user.controller';
-import { StudentController } from '../../controllers/student.controller';
 import { RoleController } from '../../controllers/role.controller';
-import { GroupController } from '../../controllers/group.controller';
-import { MarkController } from '../../controllers/mark.controller';
+import { Company2ActivityController } from '../../controllers/company2activity.controller';
+import { Company2ItemController } from '../../controllers/company2item.controller';
+import { EmailController } from '../../controllers/email.controller';
+import { ItemController } from '../../controllers/item.controller';
+import { PhoneController } from '../../controllers/phone.controller';
+import { ItemCategoryController } from '../../controllers/itemCategory.controller';
 
 const router = Router();
 
@@ -31,13 +34,13 @@ router.use(
         // Запрет дейсвтия для не указаных ролей
         // disabledActions: [Action.CREATE, Action.GET_LIST, Action.GET_ONE, Action.UPDATE, Action.DELETE],
         // Установка ролей для доступа к действию
-        actions: {
+        /* actions: {
             [Action.CREATE]: [UserRole.ADMIN, UserRole.DEKAN],
             [Action.DELETE]: [UserRole.ADMIN, UserRole.DEKAN],
             [Action.UPDATE]: [UserRole.ADMIN, UserRole.DEKAN],
-        },
+        }, */
         // Дефолтные роли, которые устанавливаются по умолчанию на каждое действие, которое не было определено в `actions`
-        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+        defaultRoles: [UserRole.ADMIN],
     })
 );
 
@@ -45,46 +48,90 @@ router.use(
     '/role',
     authType.optional,
     crud(RoleController, {
-        actions: {
+        /* actions: {
             [Action.CREATE]: [UserRole.ADMIN],
             [Action.DELETE]: [UserRole.ADMIN],
             [Action.UPDATE]: [UserRole.ADMIN],
-        },
-        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER, UserRole.USER, UserRole.STUDENT],
+        }, */
+        defaultRoles: [UserRole.ADMIN],
     })
 );
 
 router.use(
-    '/student',
-    authType.required,
-    crud(StudentController, {
-        actions: {
-            [Action.CREATE]: [UserRole.ADMIN, UserRole.DEKAN],
-            [Action.DELETE]: [UserRole.ADMIN, UserRole.DEKAN],
-            [Action.UPDATE]: [UserRole.ADMIN, UserRole.DEKAN],
-        },
-        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+    '/c2a',
+    authType.optional,
+    crud(Company2ActivityController, {
+        /* actions: {
+            [Action.CREATE]: [UserRole.ADMIN],
+            [Action.DELETE]: [UserRole.ADMIN],
+            [Action.UPDATE]: [UserRole.ADMIN],
+        }, */
+        defaultRoles: [UserRole.ADMIN],
     })
 );
 
 router.use(
-    '/group',
-    authType.required,
-    crud(GroupController, {
-        actions: {
-            [Action.CREATE]: [UserRole.ADMIN, UserRole.DEKAN],
-            [Action.DELETE]: [UserRole.ADMIN, UserRole.DEKAN],
-            [Action.UPDATE]: [UserRole.ADMIN, UserRole.DEKAN],
-        },
-        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+    '/c2i',
+    authType.optional,
+    crud(Company2ItemController, {
+        /* actions: {
+            [Action.CREATE]: [UserRole.ADMIN],
+            [Action.DELETE]: [UserRole.ADMIN],
+            [Action.UPDATE]: [UserRole.ADMIN],
+        }, */
+        defaultRoles: [UserRole.ADMIN],
     })
 );
 
 router.use(
-    '/mark',
-    authType.required,
-    crud(MarkController, {
-        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+    '/itemCategory',
+    authType.optional,
+    crud(ItemCategoryController, {
+        /* actions: {
+            [Action.CREATE]: [UserRole.ADMIN],
+            [Action.DELETE]: [UserRole.ADMIN],
+            [Action.UPDATE]: [UserRole.ADMIN],
+        }, */
+        defaultRoles: [UserRole.ADMIN],
+    })
+);
+
+router.use(
+    '/item',
+    authType.optional,
+    crud(ItemController, {
+        /* actions: {
+            [Action.CREATE]: [UserRole.ADMIN],
+            [Action.DELETE]: [UserRole.ADMIN],
+            [Action.UPDATE]: [UserRole.ADMIN],
+        }, */
+        defaultRoles: [UserRole.ADMIN],
+    })
+);
+
+router.use(
+    '/email',
+    authType.optional,
+    crud(EmailController, {
+        /* actions: {
+            [Action.CREATE]: [UserRole.ADMIN],
+            [Action.DELETE]: [UserRole.ADMIN],
+            [Action.UPDATE]: [UserRole.ADMIN],
+        }, */
+        defaultRoles: [UserRole.ADMIN],
+    })
+);
+
+router.use(
+    '/phone',
+    authType.optional,
+    crud(PhoneController, {
+        /* actions: {
+            [Action.CREATE]: [UserRole.ADMIN],
+            [Action.DELETE]: [UserRole.ADMIN],
+            [Action.UPDATE]: [UserRole.ADMIN],
+        }, */
+        defaultRoles: [UserRole.ADMIN],
     })
 );
 

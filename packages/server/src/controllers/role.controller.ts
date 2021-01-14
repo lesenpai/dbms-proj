@@ -1,26 +1,26 @@
 import { ModelCtor, FindOptions } from 'sequelize';
-import { role, roleAttributes, roleCreationAttributes } from '../models/role';
-import { Controller } from './controler';
+import { Role, RoleAttributes, RoleCreationAttributes } from '../models/Role';
+import { Controller } from './controller';
 
-export type IRoleJSON = roleAttributes;
+export type IRoleJSON = RoleAttributes;
 
 export class RoleController extends Controller {
-    public static model = role as ModelCtor<role>;
+    public static model = Role as ModelCtor<Role>;
 
-    public static async doCreate(data: roleCreationAttributes) {
+    public static async doCreate(data: RoleCreationAttributes) {
         return super.doCreate(data);
     }
 
-    public static async doUpdate(options: FindOptions<roleAttributes>, data: any) {
-        return super.doUpdate<role, roleAttributes>(options, data);
+    public static async doUpdate(options: FindOptions<RoleAttributes>, data: any) {
+        return super.doUpdate<Role, RoleAttributes>(options, data);
     }
 
-    public static async doGetOne(options?: FindOptions<roleAttributes>) {
+    public static async doGetOne(options?: FindOptions<RoleAttributes>) {
         return super.doGetOne(options);
     }
 
-    public static async doGetList(options: FindOptions<roleAttributes>) {
-        return super.doGetList<role, roleAttributes>({
+    public static async doGetList(options: FindOptions<RoleAttributes>) {
+        return super.doGetList<Role, RoleAttributes>({
             ...options,
             ...this.fullAttr(),
         });
@@ -30,15 +30,15 @@ export class RoleController extends Controller {
         return super.doDestroy(id);
     }
 
-    public static fullAttr(safe = true): FindOptions<roleAttributes> {
+    public static fullAttr(safe = true): FindOptions<RoleAttributes> {
         return {
-            attributes: ['id', 'name', 'role'],
+            attributes: ['id', 'name'],
         };
     }
 
     // Service methods
 
-    public static async create(attr: roleCreationAttributes) {
+    public static async create(attr: RoleCreationAttributes) {
         let newRec = await this.model.create({
             ...attr,
         });

@@ -1,17 +1,14 @@
 export enum UserRole {
-    NONE = 1 << 0,
-    USER = 1 << 1,
-    STUDENT = 1 << 2,
-    TEACHER = 1 << 3,
-    DEKAN = 1 << 4,
-    ADMIN = 1 << 5,
+    NONE = 0,
+    ADMIN = 1,
+    AGENT = 2,
+    VISITOR = 3
 }
 
-/*
-	('Никто', 1)
-	('Пользователь', 2)
-	('Студент', 4)
-	('Преподаватель', 8)
-	('Деканат', 16)
-	('Администратор', 32)
-*/
+// Article, Item, etc.
+export enum ContentStatus {
+    MODERATION = 1,
+    PUBLISHED = 2,
+    DELETED = 3,
+    DRAFT = 4
+}

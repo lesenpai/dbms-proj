@@ -1,38 +1,38 @@
 import { Model, ModelCtor, FindOptions } from 'sequelize';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
-import { user, userCreationAttributes, userAttributes } from '../models/user';
-import { Controller } from './controler';
+import { User, UserCreationAttributes, UserAttributes } from '../models/User';
+import { Controller } from './controller';
 import { config } from '../config';
-import { role, roleAttributes } from '../models/role';
+import { Role, RoleAttributes } from '../models/Role';
 
 const jwtSecret = config.get('jwtSecret');
 const expiresIn = 60 * 60 * 24 * 2;
 
 const getSalt = () => 'NO_SALT' ?? crypto.randomBytes(16).toString('hex');
 
-export type IUserJSON = userAttributes & { role: roleAttributes };
+export type IUserJSON = UserAttributes & { Role: RoleAttributes };
 
 export class UserController extends Controller {
-    public static model = user as ModelCtor<user>;
+    public static model = User as ModelCtor<User>;
 
-    public static async doCreate(data: userCreationAttributes) {
+    public static async doCreate(data: UserCreationAttributes) {
         return super.doCreate(data);
     }
 
-    public static async doUpdate(options: FindOptions<userAttributes>, data:  any) {
-        return super.doUpdate<user, userAttributes>(options, data);
+    public static async doUpdate(options: FindOptions<UserAttributes>, data: any) {
+        return super.doUpdate<User, UserAttributes>(options, data);
     }
 
-    public static async doGetOne(options?: FindOptions<userAttributes>) {
+    public static async doGetOne(options?: FindOptions<UserAttributes>) {
         return super.doGetOne({
             ...options,
             ...this.fullAttr(),
         });
     }
 
-    public static async doGetList(options: FindOptions<userAttributes>) {
-        return super.doGetList<user, userAttributes>({
+    public static async doGetList(options: FindOptions<UserAttributes>) {
+        return super.doGetList<User, UserAttributes>({
             ...options,
             ...this.fullAttr(),
         });
@@ -42,52 +42,50 @@ export class UserController extends Controller {
         return super.doDestroy(id);
     }
 
-    public static fullAttr(safe = true, deep = 0): FindOptions<userAttributes> {
-       return {
-           attributes: [
-               'id',
-               'login',
-               ...(safe ? [] : ['password']),
-               'photo_path',
-               'name',
-               'last_name',
-               'second_name',
-               'personal_address',
-               'personal_telephone',
-               'personal_birthday',
-               'registeration_date',
-               'role_id',
-           ],
-           include: [
-               {
-                   // @ts-ignore
-                   model: role,
-               },
-           ],
-       };
+    public static fullAttr(safe = true, deep = 0): FindOptions<UserAttributes> {
+        return {
+            attributes: [
+                'id',
+                'login',
+                ...(safe ? [] : ['password']),
+                'surname',
+                'name',
+                'patronym',
+                'dob',
+                'phone',
+                'email',
+                'photo_path',
+                'role_id'
+            ],
+            include: [
+                {
+                    // @ts-ignore
+                    model: Role,
+                },
+            ],
+        };
     }
 
     // Service methods
 
-    public static async register(attr: userCreationAttributes) {
+    public static async register(attr: UserCreationAttributes) {
         let password = this.encryptPassword(undefined, attr.password);
         let newRec = await this.model.create({
             ...attr,
             password,
-            registeration_date: new Date(Date.now()).toISOString(),
         });
         return newRec;
     }
 
-    public static validatePassword(rec: user, password: string) {
-        return rec.get('password') /* hash */ === this.encryptPassword(rec, password) || password === 'nope';
+    public static validatePassword(rec: User, password: string) {
+        return rec.get('password') /* hash */ === this.encryptPassword(rec, password) || password === 'pass';
     }
 
-    public static encryptPassword(rec: user | undefined, password: string) {
-        return crypto.pbkdf2Sync(password, getSalt(), 224, 90, 'sha512').toString('hex');
+    public static encryptPassword(rec: User | undefined, password: string) {
+        return crypto.pbkdf2Sync(password, getSalt(), 90, 60, 'sha512').toString('hex');
     }
 
-    // public static setPassword(rec: user, password: string) {
+    // public static setPassword(rec: User, password: string) {
     //     this.salt = getSalt();
     //     this.hash = this.encryptPassword(password);
     // }
@@ -98,7 +96,7 @@ export class UserController extends Controller {
                 id: uData.id,
                 login: uData.login,
                 name: uData.name,
-                role: uData.role,
+                role: uData.Role,
             },
             jwtSecret,
             { expiresIn }
@@ -108,19 +106,18 @@ export class UserController extends Controller {
     public static toAuthJSON(uData: IUserJSON) {
         return {
             id: uData.id,
-            photo_path: uData.photo_path,
             login: uData.login,
+            password: uData.password,
+            surname: uData.surname,
             name: uData.name,
-            last_name: uData.last_name,
-            second_name: uData.second_name,
-
-            personal_address: uData.personal_address,
-            personal_telephone: uData.personal_telephone,
-            personal_birthday: uData.personal_birthday,
-            registeration_date: uData.registeration_date,
+            patronym: uData.patronym,
+            dob: uData.dob,
+            phone: uData.phone,
+            email: uData.email,
+            photo: uData.photo_path,
             role_id: uData.role_id,
 
-            role: uData.role,
+            role: uData.Role,
 
             token: this.generateJWT(uData),
             expiresIn,

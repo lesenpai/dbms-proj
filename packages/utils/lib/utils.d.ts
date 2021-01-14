@@ -1,8 +1,12 @@
 export declare enum UserRole {
-    NONE = 1,
-    USER = 2,
-    STUDENT = 4,
-    TEACHER = 8,
-    DEKAN = 16,
-    ADMIN = 32
+    NONE = 0,
+    ADMIN = 1,
+    AGENT = 2,
+    VISITOR = 3
+}
+export declare enum ContentStatus {
+    MODERATION = 1,
+    PUBLISHED = 2,
+    DELETED = 3,
+    DRAFT = 4
 }
