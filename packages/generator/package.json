@@ -1,5 +1,5 @@
 {
-  "name": "@dbms-proj/utils",
+  "name": "@dbms-proj/generator",
   "version": "1.0.0",
   "main": "lib/index.js",
   "author": "xTCry [Vladislav Kh] (https://github.com/xTCry/)",
@@ -8,7 +8,11 @@
     "build": "tsc -b"
   },
   "dependencies": {
-    "ololog": "^1.1.164",
-    "signale": "^1.4.0"
+    "@dbms-proj/utils": "^1.0.0",
+    "chalk": "^4.1.0",
+    "commander": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.2"
   }
 }
