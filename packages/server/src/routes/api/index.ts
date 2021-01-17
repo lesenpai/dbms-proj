@@ -135,6 +135,94 @@ router.use(
     })
 );
 
+router.use(
+    '/schedule',
+    authType.required,
+    crud(ScheduleController, {
+        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+    })
+);
+
+router.use(
+    '/teacher',
+    authType.required,
+    crud(TeacherController, {
+        actions: {
+            [Action.GET_LIST]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+            [Action.GET_ONE]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+        },
+        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN],
+    })
+);
+
+router.use(
+    '/auditory',
+    authType.required,
+    crud(AuditoryController, {
+        actions: {
+            [Action.GET_LIST]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+            [Action.GET_ONE]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+        },
+        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN],
+    })
+);
+
+router.use(
+    '/lesson',
+    authType.required,
+    crud(LessonController, {
+        actions: {
+            [Action.GET_LIST]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+            [Action.GET_ONE]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+        },
+        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN],
+    })
+);
+
+router.use(
+    '/specialty',
+    authType.required,
+    crud(SpecialtyController, {
+        actions: {
+            [Action.GET_LIST]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+            [Action.GET_ONE]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+        },
+        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN],
+    })
+);
+
+router.use(
+    '/kafedra',
+    authType.required,
+    crud(KafedraController, {
+        actions: {
+            [Action.GET_LIST]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+            [Action.GET_ONE]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+        },
+        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN],
+    })
+);
+
+router.use(
+    '/teacher2lesson',
+    authType.required,
+    crud(Teacher2lessonController, {
+        actions: {
+            [Action.GET_LIST]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+            [Action.GET_ONE]: [UserRole.ADMIN, UserRole.DEKAN, UserRole.TEACHER],
+        },
+        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN],
+    })
+);
+
+router.use(
+    '/headman2group',
+    authType.required,
+    crud(Headman2groupController, {
+        defaultRoles: [UserRole.ADMIN, UserRole.DEKAN],
+    })
+);
+
 router.use('/images', imagesRoute);
 
 router.use((req, res, next) => {

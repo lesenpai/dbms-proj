@@ -42,6 +42,8 @@ import {
 import { styles } from './StudentCreate';
 import StudentFilter from './StudentFilter';
 import { FullName } from '../User/UserEdit';
+import { UserRole } from '../../types';
+import FullNameField from '../User/FullNameField';
 
 const dataRowClick = (id, basePath, record) => 'edit'; // record.editable ? 'edit' : 'show';
 
@@ -75,28 +77,30 @@ const Empty = ({ basePath = '', resource = {} }) => {
     );
 };
 
-const ExpandStudentEdit = (props) => {
+const ExpandEdit = ({ permissions, ...props }: any) => {
     const classes = useStyles();
     return (
-        <Edit {...props} title=" ">
-            <SimpleForm
-                // form={`order_edit_${props.id}`}
-                undoable={false}
-            >
-                <TextInput source="student_id" formClassName={classes.part_first} validate={required()} />
-                <ReferenceInput
-                    source="user_id"
-                    filter={{ role_id: 3 }}
-                    reference="user"
-                    formClassName={classes.part_secont}
+        [UserRole.ADMIN, UserRole.DEKAN].includes(permissions) && (
+            <Edit {...props} title=" ">
+                <SimpleForm
+                    // form={`order_edit_${props.id}`}
+                    undoable={false}
                 >
-                    <SelectInput optionText={FullName} />
-                </ReferenceInput>
-                <ReferenceInput source="group_id" reference="group">
-                    <SelectInput optionText="name" />
-                </ReferenceInput>
-            </SimpleForm>
-        </Edit>
+                    <TextInput source="student_id" formClassName={classes.part_first} validate={required()} />
+                    <ReferenceInput
+                        source="user_id"
+                        filter={{ role_id: UserRole.STUDENT }}
+                        reference="user"
+                        formClassName={classes.part_secont}
+                    >
+                        <SelectInput optionText={FullName} />
+                    </ReferenceInput>
+                    <ReferenceInput source="group_id" reference="group">
+                        <SelectInput optionText="name" />
+                    </ReferenceInput>
+                </SimpleForm>
+            </Edit>
+        )
     );
 };
 
@@ -141,7 +145,7 @@ const ColoredNumberField = (props) =>
         )
     ) : null;
 
-export const StudentList = (props) => {
+export const StudentList = ({ permissions, ...props }) => {
     // const [dialogData, setDialogData] = React.useState(initDialog);
     // const classes = useStyles();
 
@@ -155,11 +159,12 @@ export const StudentList = (props) => {
             filters={<StudentFilter />}
             bulkActionButtons={<BulkActionButtons />}
         >
-            <Datagrid rowClick={dataRowClick} expand={<ExpandStudentEdit />}>
+            <Datagrid rowClick={dataRowClick} expand={<ExpandEdit />}>
                 <TextField source="student_id" />
 
                 <ReferenceField source="user_id" reference="user">
-                    <TextField source="last_name" />
+                    {/* <TextField source="last_name" /> */}
+                    <FullNameField />
                 </ReferenceField>
 
                 <ReferenceField source="group_id" reference="group">
@@ -189,7 +194,7 @@ export const StudentList = (props) => {
                 {/* <ViolateField source="id" label="Violate" /> */}
                 {/* <ActionField source="status" label="Action" dialogData={dialogData} setDialogData={setDialogData} /> */}
 
-                <EditButton label="" />
+                {[UserRole.ADMIN, UserRole.DEKAN].includes(permissions) && <EditButton />}
                 {/* <ShowButton label="" /> */}
             </Datagrid>
         </List>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Edit, SimpleForm, TextInput, required, SelectInput, ReferenceInput } from 'react-admin';
+import { UserRole } from '../../types';
 import { FullName } from '../User/UserEdit';
 
 const Title = (props) => {
@@ -13,7 +14,7 @@ export const StudentEdit = (props) => (
             <TextInput source="id" disabled />
             <TextInput source="student_id" validate={required()} />
 
-            <ReferenceInput source="user_id" reference="user" filter={{ role_id: 3 }}>
+            <ReferenceInput source="user_id" reference="user" filter={{ role_id: UserRole.STUDENT }}>
                 <SelectInput optionText={FullName} />
             </ReferenceInput>
 
