@@ -3,8 +3,7 @@ import passport from 'passport';
 import Boom from '@hapi/boom';
 import { authType } from '../../tools/auth';
 import { UserController, IUserJSON } from '../../controllers/user.controller';
-import { log } from '../../tools/logger';
-import { AdminController } from '../../controllers/admin.controller';
+import { slog } from '@dbms-proj/utils';
 
 const router = Router();
 
@@ -31,8 +30,8 @@ router.post('/login', async (req, res, next) =>
 router.get('/initAdmin', authType.optional, async (req, res, next) => {
     try {
         const user = await UserController.model.findOne({ where: { login: 'admin' } });
-        log.debug('user', user);
-
+        slog.debug('user', user);
+        
         if (!user) {
             const newUser = await UserController.register({
                 login: 'admin',
@@ -44,7 +43,7 @@ router.get('/initAdmin', authType.optional, async (req, res, next) => {
                 email: 'mail@example.com',
                 role_id: 1,
             });
-            log.debug('new user', newUser);
+            slog.debug('new user', newUser);
 
             const newAdmin = await AdminController.doCreate({
                 // passport_ser: '',
@@ -56,8 +55,8 @@ router.get('/initAdmin', authType.optional, async (req, res, next) => {
                 // flat: ,
                 user_id: newUser.id
             });
-            log.debug('new admin', newAdmin);
 
+            slog.debug('new user', newUser);
             res.jsongo(UserController.toAuthJSON(newUser));
         } else {
             res.jsongo({ already: true });
