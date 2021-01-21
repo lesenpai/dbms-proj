@@ -67,7 +67,7 @@ export const dataProvider = {
 
     create: async (resource, params) => {
         const { data } = params;
-        if (resource === 'user' && data.new_photo?.rawFile) {
+        if (resource === 'User' && data.new_photo?.rawFile) {
             const { new_photo } = data;
             data.new_photo = undefined;
             try {
@@ -79,15 +79,26 @@ export const dataProvider = {
             } catch (e) {
                 // TODO: Show notify with error
             }
-        } else if (resource === 'orders' && data.images) {
+        } else if (resource === 'Company' && data.new_photo?.rawFile) {
+            const { new_photo } = data;
+            data.new_photo = undefined;
             try {
-                const images = await uploadImages(data.images);
-                data.images = [];
-                for (const img of images) {
-                    data.images.push({
-                        url: `${Backend.serverURL}/api/images/temp${img.path}`,
-                        name: img.originalname,
-                    });
+                const isNewPhoto = new_photo.rawFile instanceof File;
+                if (isNewPhoto) {
+                    const [img] = await uploadImages([new_photo]);
+                    data.logo_path = `${Backend.serverURL}/${img.path}`;
+                }
+            } catch (e) {
+                // TODO: Show notify with error
+            }
+        } else if (resource === 'Article' && data.new_photo?.rawFile) {
+            const { new_photo } = data;
+            data.new_photo = undefined;
+            try {
+                const isNewPhoto = new_photo.rawFile instanceof File;
+                if (isNewPhoto) {
+                    const [img] = await uploadImages([new_photo]);
+                    data.image_path = `${Backend.serverURL}/${img.path}`;
                 }
             } catch (e) {
                 // TODO: Show notify with error
@@ -126,7 +137,7 @@ export const dataProvider = {
         const { data } = params;
         console.log(resource, data);
         
-        if (resource === 'user' && data.new_photo?.rawFile) {
+        if (resource === 'User' && data.new_photo?.rawFile) {
             const { new_photo } = data;
             data.new_photo = undefined;
             try {
@@ -138,15 +149,26 @@ export const dataProvider = {
             } catch (e) {
                 // TODO: Show notify with error
             }
-        } else if (resource === 'orders' && data.images) {
+        } else if (resource === 'Company' && data.new_photo?.rawFile) {
+            const { new_photo } = data;
+            data.new_photo = undefined;
             try {
-                const updatedImages = data.images.filter((e) => !e.created_at);
-                data.images = data.images.filter((e) => !!e.created_at);
-                if (updatedImages.length) {
-                    const newImages = await uploadImages(updatedImages);
-                    for (const img of newImages) {
-                        data.images.push({ url: `${Backend.serverURL}/${img.path}`, name: img.originalname });
-                    }
+                const isNewPhoto = new_photo.rawFile instanceof File;
+                if (isNewPhoto) {
+                    const [img] = await uploadImages([new_photo]);
+                    data.logo_path = `${Backend.serverURL}/${img.path}`;
+                }
+            } catch (e) {
+                // TODO: Show notify with error
+            }
+        } else if (resource === 'Article' && data.new_photo?.rawFile) {
+            const { new_photo } = data;
+            data.new_photo = undefined;
+            try {
+                const isNewPhoto = new_photo.rawFile instanceof File;
+                if (isNewPhoto) {
+                    const [img] = await uploadImages([new_photo]);
+                    data.image_path = `${Backend.serverURL}/${img.path}`;
                 }
             } catch (e) {
                 // TODO: Show notify with error

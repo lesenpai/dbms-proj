@@ -21,7 +21,7 @@ class App extends Component {
                 layout={Layout}
                 loginPage={LoginWithTheme}
                 catchAll={NotFound}
-                dashboard={Dashboard}
+                // dashboard={Dashboard}
             >
                 {permissions => Object.values(Resources).map((res, i) => (
                     <Resource {...res(permissions)} key={i} />

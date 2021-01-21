@@ -1,4 +1,5 @@
 import Sequelize, { DataTypes, Model, Optional } from 'sequelize';
+import type { Company, CompanyId } from './Company';
 import type { User, UserId } from './User';
 
 export interface AgentAttributes {
@@ -16,6 +17,11 @@ export class Agent extends Model<AgentAttributes, AgentCreationAttributes> imple
   company_id!: number;
   user_id!: number;
 
+  // Agent belongsTo Company
+  Company!: Company;
+  getCompany!: Sequelize.BelongsToGetAssociationMixin<Company>;
+  setCompany!: Sequelize.BelongsToSetAssociationMixin<Company, CompanyId>;
+  createCompany!: Sequelize.BelongsToCreateAssociationMixin<Company>;
   // Agent belongsTo User
   User!: User;
   getUser!: Sequelize.BelongsToGetAssociationMixin<User>;
@@ -32,7 +38,11 @@ export class Agent extends Model<AgentAttributes, AgentCreationAttributes> imple
     },
     company_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'Company',
+        key: 'id'
+      }
     },
     user_id: {
       type: DataTypes.INTEGER,

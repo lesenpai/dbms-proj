@@ -1,41 +1,46 @@
-import React from 'react';
-import { List, Datagrid, TextField, EditButton, ReferenceField } from 'react-admin';
-import { UserRole } from '../../types';
-import AvatarField from './AvatarField';
-// import UserLinkField from './UserLinkField';
+import FullNameField from './FullNameField';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import TextFieldEmpty from '../../components/TextFieldEmpty';
+import {
+    List,
+    Datagrid,
+    TextField,
+    EditButton,
+    ReferenceField,
+    useVersion,
+    useDataProvider,
+    Filter,
+    FilterProps,
+    TextInput,
+} from 'react-admin';
+import { stringify } from 'query-string';
+import { ExpandLess } from '@material-ui/icons';
+import CheckRole from '../../components/CheckRole';
+import { allowedRoles } from '.';
 
-export const UserList = ({ permissions, ...props }) => {
-    // const translate = useTranslate();
+const MyFilter: FC<Omit<FilterProps, 'children'>> = (props) => (
+    <Filter {...props}>
+        <TextInput label='Search' source='q' alwaysOn />
+    </Filter>
+);
+
+export const UserList = (props) => {
     return (
-        <List exporter={false} perPage={25} {...props}>
-            <Datagrid optimized rowClick="edit">
-                {/* <UserLinkField /> */}
-                <AvatarField size={'30'} />
-                <TextField source="id" />
-                <TextField source="login" />
-                <TextField source="name" />
-                <TextField source="last_name" />
-                <TextField source="second_name" />
+        <List {...props} exporter={false} perPage={25} bulkActionButtons={false} filters={<MyFilter context='button' />}>
+            <Datagrid optimized rowClick='edit'>
+                <TextField source='id' />
+                <FullNameField label='ФИО' />
+                <TextField source='login' />
+                <TextField source='dob' />
+                <TextField source='phone' />
+                <TextField source='email' />
 
-                <ReferenceField source="role_id" reference="role" link={false}>
-                    <TextField source="name" />
+                <ReferenceField source='role_id' reference='Role'>
+                    <TextField source='name' />
                 </ReferenceField>
-
-                {/* <MyUrlField source="telegram" /> */}
-
-                {/* <ReferenceManyField
-                    label={translate('resources.users.fields.orders')}
-                    reference="orders"
-                    target="executor"
-                    sortable={false}
-                >
-                    <Datagrid>
-                        <TextField source="title" />
-                        <SelectField source="status" choices={orderStatus} />
-                        <EditButton label="" />
-                    </Datagrid>
-                </ReferenceManyField> */}
-                {[UserRole.ADMIN, UserRole.DEKAN].includes(permissions) && <EditButton />}
+                <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
+                    <EditButton />
+                </CheckRole>
             </Datagrid>
         </List>
     );

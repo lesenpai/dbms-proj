@@ -1,0 +1,16 @@
+export { Controller } from './controller';
+export { ActivityController, IActivityJSON } from './Activity.controller';
+export { AdminController, IAdminJSON } from './Admin.controller';
+export { AgentController, IAgentJSON } from './Agent.controller';
+export { ArticleController, IArticleJSON } from './Article.controller';
+export { CompanyController, ICompanyJSON } from './Company.controller';
+export { Company2ActivityController, ICompany2ActivityJSON } from './Company2Activity.controller';
+export { Company2ItemController, ICompany2ItemJSON } from './Company2Item.controller';
+export { EmailController, IEmailJSON } from './Email.controller';
+export { ItemCategoryController, IItemCategoryJSON } from './ItemCategory.controller';
+export { ItemTypeController, IItemTypeJSON } from './ItemType.controller';
+export { ItemController, IItemJSON } from './Item.controller';
+export { OpeningHoursPeriodController, IOpeningHoursPeriodJSON } from './OpeningHoursPeriod.controller';
+export { PhoneController, IPhoneJSON } from './Phone.controller';
+export { RoleController, IRoleJSON } from './Role.controller';
+export { UserController, IUserJSON } from './User.controller';

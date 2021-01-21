@@ -106,8 +106,12 @@ export function initModels(sequelize: Sequelize) {
 
   Admin.belongsTo(User, { foreignKey: "user_id"});
   User.hasMany(Admin, { foreignKey: "user_id"});
+  Agent.belongsTo(Company, { foreignKey: "company_id"});
+  Company.hasMany(Agent, { foreignKey: "company_id"});
   Agent.belongsTo(User, { foreignKey: "user_id"});
   User.hasMany(Agent, { foreignKey: "user_id"});
+  Article.belongsTo(Company, { foreignKey: "company_id"});
+  Company.hasMany(Article, { foreignKey: "company_id"});
   Company2Activity.belongsTo(Activity, { foreignKey: "activity_id"});
   Activity.hasMany(Company2Activity, { foreignKey: "activity_id"});
   Company2Activity.belongsTo(Company, { foreignKey: "company_id"});

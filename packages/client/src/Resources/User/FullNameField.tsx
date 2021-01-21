@@ -4,7 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { FieldProps } from 'react-admin';
 import AvatarField from './AvatarField';
-import { userAttributes } from '../../types';
+import { IUserModel } from '../../types';
+
+export const FullName = (record) => ['surname', 'name', 'patronym'].map((e) => record[e]).join(' ');
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-interface Props extends FieldProps<userAttributes> {
+interface Props extends FieldProps<IUserModel> {
     size?: string;
 }
 
@@ -28,7 +30,7 @@ const FullNameField: FC<Props> = ({ record, size }) => {
     return record ? (
         <div className={classes.root}>
             <AvatarField className={classes.avatar} record={record} size={size} />
-            {record.second_name} {record.name} {record.last_name}
+            {record.surname} {record.name} {record.patronym}
         </div>
     ) : null;
 };

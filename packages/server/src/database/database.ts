@@ -1,7 +1,7 @@
 import { olog } from '@dbms-proj/utils';
 import { Sequelize } from 'sequelize';
 import { config } from '../config';
-import { initModels } from '../models/init-models';
+import { initModels } from '@dbms-proj/models';
 
 interface DBConfig {
     database: string;

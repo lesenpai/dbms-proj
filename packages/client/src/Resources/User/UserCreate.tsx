@@ -1,22 +1,29 @@
 import React from 'react';
-import { Create, SimpleForm, TextInput, PasswordInput, required, ReferenceInput, SelectInput, DateInput } from 'react-admin';
-// import PhoneInput from 'react-phone-number-input'
-// import 'react-phone-number-input/style.css'
+import { Create, ImageField, ImageInput, ReferenceInput, SelectInput, SimpleForm, TextInput } from 'react-admin';
+import AvatarField from './AvatarField';
 
 export const UserCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="login" autoFocus validate={required()} />
-            <TextInput source="name" validate={required()} />
-            <TextInput source="last_name" validate={required()} />
-            <TextInput source="second_name" />
-            <DateInput source="personal_birthday" validate={required()} />
-            <TextInput source="personal_address" validate={required()} />
-            <TextInput source="personal_telephone" validate={required()} />
+            <AvatarField size='128' />
+            <ImageInput source='new_photo' accept='image/*'>
+                <ImageField source='photo_path' />
+            </ImageInput>
+            
+            <TextInput source='id' disabled autoFocus />
+            <TextInput source='login' />
+            <TextInput source='password' />
+            <TextInput source='surname' />
+            <TextInput source='name' />
+            <TextInput source='patronym' />
+            <TextInput source='dob' />
+            <TextInput source='phone' />
+            <TextInput source='email' />
+            <TextInput source='photo_path' />
+            <TextInput source='role_id' />
 
-            <PasswordInput source="password" validate={required()} />
-            <ReferenceInput source="role_id" reference="role">
-                <SelectInput optionText="name" />
+            <ReferenceInput source='role_id' reference='Role'>
+                <SelectInput optionText='name' />
             </ReferenceInput>
         </SimpleForm>
     </Create>

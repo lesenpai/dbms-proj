@@ -1,0 +1,23 @@
+import { OpeningHoursPeriodList } from './OpeningHoursPeriodList';
+import { OpeningHoursPeriodCreate } from './OpeningHoursPeriodCreate';
+import { OpeningHoursPeriodEdit } from './OpeningHoursPeriodEdit';
+
+import icon from '@material-ui/icons/FiberManualRecord';
+import { UserRole } from '../../types';
+export const OpeningHoursPeriodIcon = icon;
+
+export const allowedRoles = {
+    list: [UserRole.ADMIN, UserRole.AGENT, UserRole.VISITOR],
+    create: [UserRole.ADMIN, UserRole.AGENT],
+    edit: [UserRole.ADMIN, UserRole.AGENT],
+    fields: [UserRole.ADMIN],
+};
+
+export const openinghoursperiodResource = (permissions) => ({
+    list: [...allowedRoles.list].includes(permissions) ? OpeningHoursPeriodList : null,
+    create: [...allowedRoles.create].includes(permissions) ? OpeningHoursPeriodCreate : null,
+    edit: [...allowedRoles.edit].includes(permissions) ? OpeningHoursPeriodEdit : null,
+
+    icon,
+    name: 'OpeningHoursPeriod',
+});

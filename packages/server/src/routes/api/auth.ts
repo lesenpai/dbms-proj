@@ -4,6 +4,7 @@ import Boom from '@hapi/boom';
 import { authType } from '../../tools/auth';
 import { UserController, IUserJSON } from '../../controllers/user.controller';
 import { slog } from '@dbms-proj/utils';
+import { AdminController } from '../../controllers';
 
 const router = Router();
 
@@ -35,7 +36,7 @@ router.get('/initAdmin', authType.optional, async (req, res, next) => {
         if (!user) {
             const newUser = await UserController.register({
                 login: 'admin',
-                password: '123456',
+                password: 'root',
                 name: 'Lev',
                 surname: 'Platonov',
                 dob: new Date('12.07.2000').toISOString(),

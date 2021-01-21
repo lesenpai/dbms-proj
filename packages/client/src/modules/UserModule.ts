@@ -1,27 +1,27 @@
 import decodeJwt from 'jwt-decode';
 import store from '../store';
-import { roleAttributes, userAttributes } from '../types';
+import { roleAttributes, IUserModel } from '../types';
 
 // User class
-export class User implements userAttributes {
+export class User implements IUserModel {
     public id: number;
     public photo_path?: string;
     public login: string;
     public name: string;
-    public last_name: string;
-    public second_name?: string;
+    public patronym: string;
+    public surname?: string;
 
-    public personal_address: string;
-    public personal_telephone: string;
-    public personal_birthday: string;
-    public registeration_date: string;
+    // public personal_address: string;
+    public phone: string;
+    public dob: string;
+    // public registeration_date: string;
     public role_id: number;
 
     public role?: roleAttributes;
     public token: string;
     public expiresIn: number;
 
-    constructor(data: userAttributes) {
+    constructor(data: IUserModel) {
         let token = data.token || getToken();
 
         this.token = token;
@@ -37,20 +37,18 @@ export class User implements userAttributes {
         this.photo_path = data.photo_path;
         this.login = data.login;
         this.name = data.name;
-        this.last_name = data.last_name;
-        this.second_name = data?.second_name;
+        this.patronym = data.patronym;
+        this.surname = data?.surname;
 
-        this.personal_address = data.personal_address;
-        this.personal_telephone = data.personal_telephone;
-        this.personal_birthday = data.personal_birthday;
-        this.registeration_date = data.registeration_date;
+        this.phone = data.phone;
+        this.dob = data.dob;
         this.role_id = data.role_id;
-
+        //@ts-ignore
         this.role = data?.role;
     }
 
     public get fullName() {
-        return ['last_name', 'name', 'second_name'].map((e) => this[e]).join(' ');
+        return ['surname', 'name', 'patronym'].map((e) => this[e]).join(' ')+` (${this.role?.name})`;
     }
 
     public get avatar() {
@@ -69,13 +67,11 @@ export class User implements userAttributes {
         return new User({
             id: 9,
             login: 'login',
-            last_name: 'LastName',
+            patronym: 'LastName',
             name: 'Name',
-            personal_address: '',
-            personal_birthday: '2000-06-06',
-            personal_telephone: '',
+            dob: '2000-06-06',
+            phone: '',
             photo_path: null,
-            registeration_date: '2020-12-22',
             role_id: 1,
         });
     }

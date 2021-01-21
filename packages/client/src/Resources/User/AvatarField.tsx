@@ -4,9 +4,9 @@ import Avatar from '@material-ui/core/Avatar';
 import { FieldProps } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { userAttributes } from '../../types';
+import { IUserModel } from '../../types';
 
-interface Props extends FieldProps<userAttributes> {
+interface Props extends FieldProps<IUserModel> {
     className?: string;
     size?: string;
 }
@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const AvatarField: FC<Props> = ({ record, size = '25', className }) => {
+const AvatarField: FC<Props> = ({ record, size = '25', className, source }) => {
     const classes = useStyles();
 
     return record ? (
         <Avatar
-            src={`${record.photo_path}?size=${size}x${size}`}
+            src={`${record[source]}?size=${size}x${size}`}
             style={{ width: parseInt(size, 10), height: parseInt(size, 10) }}
             className={className ?? classes.avatar}
         />

@@ -1,51 +1,39 @@
 import React, { FC } from 'react';
-import {
-    Edit,
-    SimpleForm,
-    TextInput,
-    DateInput,
-    required,
-    PasswordInput,
-    ReferenceInput,
-    SelectInput,
-    ImageField,
-    ImageInput,
-    FieldProps,
-    EditProps,
-} from 'react-admin';
-import CheckRole from '../../components/CheckRole';
-import { userAttributes, UserRole } from '../../types';
-import FullNameField from './FullNameField';
+import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, EditProps, ImageInput, ImageField } from 'react-admin';
+import AvatarField from './AvatarField';
 
-const allowedRoles = [UserRole.ADMIN, UserRole.DEKAN];
-
-export const FullName = (record) => ['last_name', 'name', 'second_name'].map((e) => record[e]).join(' ');
-
-const UserTitle: FC<FieldProps<userAttributes>> = ({ record }) =>
-    record ? <FullNameField record={record} size="32" /> : null;
+const Title = (props) => {
+    const { record } = props ?? { record: { name: 'None' } };
+    return <span>{record ? `"${record.name}"` : ''}</span>;
+};
 
 export const UserEdit: FC<EditProps> = (props) => (
-    <Edit title={<UserTitle />} {...props}>
+    <Edit title={<Title />} {...props}>
         <SimpleForm>
-            <TextInput source="id" disabled />
-            <TextInput source="login" disabled validate={required()} />
-            <TextInput source="name" validate={required()} />
-            <TextInput source="last_name" validate={required()} />
-            <TextInput source="second_name" />
-            <DateInput source="personal_birthday" />
-            <DateInput source="registeration_date" disabled />
-
-            <PasswordInput source="password" disabled={!allowedRoles.includes(props.permissions)} />
-
-            <CheckRole permissions={props.permissions} allowed={allowedRoles} deny={<TextInput source="role.name" />}>
-                <ReferenceInput source="role_id" reference="role">
-                    <SelectInput optionText="name" />
-                </ReferenceInput>
-            </CheckRole>
-
+            <AvatarField size="128" />
             <ImageInput source="new_photo" accept="image/*">
-                <ImageField source="photo_path" label="Avatar" />
+                <ImageField source="photo_path" />
             </ImageInput>
+
+            <TextInput source="id" disabled />
+            <TextInput source="login" />
+            <TextInput source="password" />
+            <TextInput source="surname" />
+            <TextInput source="name" />
+            <TextInput source="patronym" />
+            <TextInput source="dob" />
+            <TextInput source="phone" />
+            <TextInput source="email" />
+            <TextInput source="photo_path" />
+            {/* <TextInput source="role_id" /> */}
+
+            <ReferenceInput source="role_id" reference="Role">
+                <SelectInput optionText="name" />
+            </ReferenceInput>
+
+            {/* <ImageField source="photo_path" /> */}
+
+
         </SimpleForm>
     </Edit>
 );

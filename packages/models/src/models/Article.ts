@@ -1,4 +1,5 @@
 import Sequelize, { DataTypes, Model, Optional } from 'sequelize';
+import type { Company, CompanyId } from './Company';
 
 export interface ArticleAttributes {
   id: number;
@@ -23,6 +24,11 @@ export class Article extends Model<ArticleAttributes, ArticleCreationAttributes>
   company_id!: number;
   status?: number;
 
+  // Article belongsTo Company
+  Company!: Company;
+  getCompany!: Sequelize.BelongsToGetAssociationMixin<Company>;
+  setCompany!: Sequelize.BelongsToSetAssociationMixin<Company, CompanyId>;
+  createCompany!: Sequelize.BelongsToCreateAssociationMixin<Company>;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof Article {
     Article.init({
@@ -50,7 +56,11 @@ export class Article extends Model<ArticleAttributes, ArticleCreationAttributes>
     },
     company_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'Company',
+        key: 'id'
+      }
     },
     status: {
       type: DataTypes.INTEGER,

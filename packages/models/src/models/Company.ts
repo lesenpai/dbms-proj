@@ -1,4 +1,6 @@
 import Sequelize, { DataTypes, Model, Optional } from 'sequelize';
+import type { Agent, AgentId } from './Agent';
+import type { Article, ArticleId } from './Article';
 import type { Company2Activity, Company2ActivityId } from './Company2Activity';
 import type { Company2Item, Company2ItemId } from './Company2Item';
 import type { Email, EmailId } from './Email';
@@ -36,6 +38,30 @@ export class Company extends Model<CompanyAttributes, CompanyCreationAttributes>
   description?: string;
   url?: string;
 
+  // Company hasMany Agent
+  Agents!: Agent[];
+  getAgents!: Sequelize.HasManyGetAssociationsMixin<Agent>;
+  setAgents!: Sequelize.HasManySetAssociationsMixin<Agent, AgentId>;
+  addAgent!: Sequelize.HasManyAddAssociationMixin<Agent, AgentId>;
+  addAgents!: Sequelize.HasManyAddAssociationsMixin<Agent, AgentId>;
+  createAgent!: Sequelize.HasManyCreateAssociationMixin<Agent>;
+  removeAgent!: Sequelize.HasManyRemoveAssociationMixin<Agent, AgentId>;
+  removeAgents!: Sequelize.HasManyRemoveAssociationsMixin<Agent, AgentId>;
+  hasAgent!: Sequelize.HasManyHasAssociationMixin<Agent, AgentId>;
+  hasAgents!: Sequelize.HasManyHasAssociationsMixin<Agent, AgentId>;
+  countAgents!: Sequelize.HasManyCountAssociationsMixin;
+  // Company hasMany Article
+  Articles!: Article[];
+  getArticles!: Sequelize.HasManyGetAssociationsMixin<Article>;
+  setArticles!: Sequelize.HasManySetAssociationsMixin<Article, ArticleId>;
+  addArticle!: Sequelize.HasManyAddAssociationMixin<Article, ArticleId>;
+  addArticles!: Sequelize.HasManyAddAssociationsMixin<Article, ArticleId>;
+  createArticle!: Sequelize.HasManyCreateAssociationMixin<Article>;
+  removeArticle!: Sequelize.HasManyRemoveAssociationMixin<Article, ArticleId>;
+  removeArticles!: Sequelize.HasManyRemoveAssociationsMixin<Article, ArticleId>;
+  hasArticle!: Sequelize.HasManyHasAssociationMixin<Article, ArticleId>;
+  hasArticles!: Sequelize.HasManyHasAssociationsMixin<Article, ArticleId>;
+  countArticles!: Sequelize.HasManyCountAssociationsMixin;
   // Company hasMany Company2Activity
   Company2Activities!: Company2Activity[];
   getCompany2Activities!: Sequelize.HasManyGetAssociationsMixin<Company2Activity>;
