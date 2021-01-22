@@ -13,7 +13,7 @@ export interface UserAttributes {
   dob: string;
   phone: string;
   email: string;
-  photo_path?: string;
+  image_path?: string;
   role_id?: number;
 }
 
@@ -31,7 +31,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   dob!: string;
   phone!: string;
   email!: string;
-  photo_path?: string;
+  image_path?: string;
   role_id?: number;
 
   // User hasMany Admin
@@ -105,7 +105,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
       type: DataTypes.STRING(320),
       allowNull: false
     },
-    photo_path: {
+    image_path: {
       type: DataTypes.STRING(256),
       allowNull: true
     },

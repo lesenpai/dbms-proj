@@ -11,9 +11,14 @@ import {
     Filter,
     FilterProps,
     TextInput,
+    ImageInput,
+    ImageField,
+    ReferenceInput,
+    SelectInput,
 } from 'react-admin';
 import { stringify } from 'query-string';
 import { ExpandLess } from '@material-ui/icons';
+import AvatarField from '../User/AvatarField';
 
 const ItemCategoryPreloader = (props) => {
     const version = useVersion();
@@ -43,6 +48,9 @@ const ItemCategoryPreloader = (props) => {
 const MyFilter: FC<Omit<FilterProps, 'children'>> = (props) => (
     <Filter {...props}>
         <TextInput label='Search' source='q' alwaysOn />
+        <ReferenceInput source='category_id' reference='ItemCategory' sort={{ field: 'name', order: 'asc' }}>
+            <SelectInput optionText='name' />
+        </ReferenceInput>
     </Filter>
 );
 
@@ -57,9 +65,11 @@ export const ItemList = (props) => {
             filters={<MyFilter context='button' />}
         >
             <Datagrid optimized rowClick='edit'>
-                <TextField source='id' />
+                {/* <TextField source='id' /> */}
                 <TextField source='name' />
-                <TextFieldEmpty source='image_path' />
+
+                <AvatarField size='128' source='image_path' />
+
                 <TextFieldEmpty source='props' />
                 <TextFieldEmpty source='description' />
 

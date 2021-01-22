@@ -34,7 +34,7 @@ export const AdminList = (props) => {
     return (
         <List {...props} exporter={false} perPage={25} bulkActionButtons={false}>
             <Datagrid optimized rowClick='edit'>
-                <TextFieldEmpty source='id' />
+                {/* <TextFieldEmpty source='id' /> */}
                 <ReferenceField source='user_id' reference='User'>
                     <FullNameField />
                 </ReferenceField>

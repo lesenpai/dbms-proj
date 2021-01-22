@@ -1,4 +1,3 @@
-import { OpeningHoursPeriod } from '@dbms-proj/models';
 import russianMessages from 'ra-language-russian';
 
 const customMessages = {
@@ -31,7 +30,7 @@ const customMessages = {
                 role_id: 'Роль',
                 dob: 'Дата рождения',
                 phone: 'Телефон',
-                photo_path: 'Фото профиля',
+                image_path: 'Фото профиля',
             },
         },
         Role: {
@@ -85,13 +84,13 @@ const customMessages = {
             fields: {
                 full_name: 'Полное название',
                 short_name: 'Сокращенное название',
-                logo_path: 'Логотип',
+                image_path: 'Логотип',
                 country: 'Страна',
                 city: 'Город',
                 street: 'Улица',
                 building: 'Корпус',
                 office: 'Офис',
-                //description,
+                description: 'Описание',
                 url: 'Сайт',
             },
         },
@@ -159,22 +158,12 @@ const customMessages = {
             },
         },
         ItemCategory: {
-            name: 'Категория продуктов |||| Категории продуктов',
+            // name: 'Категория продуктов |||| Категории продуктов',
+            name: 'Категории продуктов',
             fields: {
                 name: 'Название',
                 parent_category_id: 'Родительская категория'
             }
-        },
-        OpeningHoursPeriod: {
-            name: 'Часы работы',
-            fields: {
-                first_day_id: 'Первый день',
-                last_day_id: 'Последний день',
-                start_time: 'Начало дня',
-                end_time: 'Конец дня',
-                company_id: 'Компания',
-                activity_id: 'Вид дейтельности',
-            },
         },
         Company2Activity: {
             name: 'Виды деят. компаний',
@@ -187,6 +176,22 @@ const customMessages = {
             name: 'Тип продукта',
             fields: {
                 name: 'Название'
+            }
+        },
+        SocialNetwork: {
+            name: 'Соцсети',
+            fields: {
+                name: 'Название',
+                image_path: 'Логотип'
+            }
+        },
+        WorkingHours: {
+            name: 'График работы',
+            fields: {
+                start_time: 'Открытие',
+                end_time: 'Закрытие',
+                short_day_end_time: 'Закрытие (сокращенный день)',
+                company_id: 'Компания',
             }
         },
     },

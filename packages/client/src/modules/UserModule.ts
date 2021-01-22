@@ -5,7 +5,7 @@ import { roleAttributes, IUserModel } from '../types';
 // User class
 export class User implements IUserModel {
     public id: number;
-    public photo_path?: string;
+    public image_path?: string;
     public login: string;
     public name: string;
     public patronym: string;
@@ -34,7 +34,7 @@ export class User implements IUserModel {
         } catch (e) {}
 
         this.id = data.id;
-        this.photo_path = data.photo_path;
+        this.image_path = data.image_path;
         this.login = data.login;
         this.name = data.name;
         this.patronym = data.patronym;
@@ -52,7 +52,7 @@ export class User implements IUserModel {
     }
 
     public get avatar() {
-        return this.photo_path ?? 'qeq';
+        return this.image_path ?? 'qeq';
     }
 
     public get soGood() {
@@ -71,7 +71,7 @@ export class User implements IUserModel {
             name: 'Name',
             dob: '2000-06-06',
             phone: '',
-            photo_path: null,
+            image_path: null,
             role_id: 1,
         });
     }

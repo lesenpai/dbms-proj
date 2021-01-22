@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ShowButton, useListContext } from 'react-admin';
+import { RichTextField, ShowButton, useListContext } from 'react-admin';
 import { Card, CardActions, CardContent, CardHeader, Avatar } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import AvatarField from '../User/AvatarField';
@@ -49,39 +49,27 @@ const CompanyGrid = (props) => {
                         // avatar={<Avatar icon={<PersonIcon />} />}
                     />
                     {/* <CardContent>
-                        <ImageField record={data[id]} source='logo_path' />
+                        <ImageField record={data[id]} source='image_path' />
                     </CardContent> */}
 
                     <CardContent>
                         {/* @ts-ignore */}
-                        <AvatarField size='128' record={data[id]} source='logo_path' />
-                        {/* <ImageField record={data[id]} source='logo_path' /> */}
+                        <AvatarField size='128' record={data[id]} source='image_path' />
+                        {/* <ImageField record={data[id]} source='image_path' /> */}
                     </CardContent>
 
                     <CardContent>
-                        <TextField record={data[id]} source='description' />
-                    </CardContent>
-                    <CardContent>
-                        {/* about&nbsp; */}
-                        <ReferenceField
-                            label='Post'
-                            resource='comments'
-                            record={data[id]}
-                            source='post_id'
-                            reference='posts'
-                            basePath={basePath}
-                        >
-                            <TextField source='title' />
-                        </ReferenceField>
+                        <RichTextField record={data[id]} source='description' />
                     </CardContent>
                     <CardActions style={{ textAlign: 'right' }}>
-                        <CheckRole
+                        {/* <CheckRole
                             permissions={props.permissions}
                             allowed={allowedRoles.edit}
                             deny={<EditButton disabled />}
                         >
                             <EditButton resource='Company' basePath={basePath} record={data[id]} />
-                        </CheckRole>
+                        </CheckRole> */}
+                        <EditButton resource='Company' basePath={basePath} record={data[id]} />
 
                         <ShowButton resource='Company' basePath={basePath} record={data[id]} />
                     </CardActions>

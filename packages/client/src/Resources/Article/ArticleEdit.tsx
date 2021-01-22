@@ -12,7 +12,7 @@ export const ArticleEdit: FC<EditProps> = (props) => (
     <Edit title={<Title />} {...props}>
         <SimpleForm>
             <ImageField source='image_path' />
-            {/* <AvatarField size='128' source="logo_path"/> */}
+            {/* <AvatarField size='128' source="image_path"/> */}
             <ImageInput source='new_photo' accept='image/*'>
                 <ImageField source='image_path' />
             </ImageInput>
@@ -23,7 +23,7 @@ export const ArticleEdit: FC<EditProps> = (props) => (
             <TextInput source='title' />
             <RichTextInput source='text' />
             <SelectInput source='status' choices={StatusList} />
-            <TextInput source='company_id' />
+            {/* <TextInput source='company_id' /> */}
 
             <ReferenceInput source='company_id' reference='Company'>
                 <SelectInput optionText='full_name' />

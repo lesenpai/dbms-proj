@@ -6,12 +6,20 @@ import { AppState } from '../types';
 import { darkTheme, lightTheme } from './themes';
 
 import AppBar from './AppBar/AppBar';
+import { makeStyles } from '@material-ui/core';
 // import Menu from '../../components/Menu/Menu';
 
 const CustomSidebar = (props: any) => <Sidebar {...props} size={200} />;
 
+const useStyles = makeStyles({
+    bg: {
+        backgroundColor: '#faa'
+    }
+});
+
 export const Layout = (props: any) => {
     const theme = useSelector((state: AppState) => (state.ThemeModule.theme === 'dark' ? darkTheme : lightTheme));
+    const classes = useStyles();
 
     return (
         <ReactLayout
@@ -20,6 +28,7 @@ export const Layout = (props: any) => {
             sidebar={CustomSidebar}
             // menu={Menu}
             theme={theme}
+            className={classes.bg}
         />
     );
 };

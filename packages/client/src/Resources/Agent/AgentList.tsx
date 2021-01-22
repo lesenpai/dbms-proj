@@ -8,7 +8,7 @@ export const AgentList = (props) => {
     return (
         <List {...props} exporter={false} perPage={25} bulkActionButtons={false}>
             <Datagrid optimized rowClick='edit'>
-                <TextField source='id' />
+                {/* <TextField source='id' /> */}
                 <ReferenceField source='user_id' reference='User'>
                     <FullNameField />
                 </ReferenceField>

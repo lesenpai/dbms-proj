@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, EditProps, ImageInput, ImageField, RichTextField } from 'react-admin';
+import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, EditProps, ImageInput, ImageField, RichTextField, TextField } from 'react-admin';
 import AvatarField from '../User/AvatarField';
 import RichTextInput from 'ra-input-rich-text';
 
@@ -11,16 +11,17 @@ const Title = (props) => {
 export const CompanyEdit: FC<EditProps> = (props) => (
     <Edit title={<Title />} {...props}>
         <SimpleForm>
-            <ImageField source='logo_path' />
-            {/* <AvatarField size='128' source="logo_path"/> */}
-            <ImageInput source='new_photo' accept='image/*'>
-                <ImageField source='logo_path' />
-            </ImageInput>
+            <TextField source="image_path" />
+            {/* <ImageField source='image_path' /> */}
+            {/* <AvatarField size='128' source="image_path"/> */}
+            {/* <ImageInput source='new_photo' accept='image/*'>
+                <ImageField source='image_path' />
+            </ImageInput> */}
 
             <TextInput source='id' disabled />
             <TextInput source='full_name' />
             <TextInput source='short_name' />
-            <TextInput source='logo_path' />
+            <TextInput source='image_path' />
             <TextInput source='country' />
             <TextInput source='city' />
             <TextInput source='street' />

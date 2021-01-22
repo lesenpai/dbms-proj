@@ -72,7 +72,7 @@ export const ActivityList = (props) => {
             filters={<MyFilter context='button' />}
         >
             <Datagrid optimized rowClick='edit' expand={<Expand />}>
-                <TextField source='id' />
+                {/* <TextField source='id' /> */}
                 <TextField source='name' /*  label={translate('resources.Activity.fields.full_name') }*/ />
                 <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
                     <EditButton />

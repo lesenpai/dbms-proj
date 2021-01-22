@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, EditProps } from 'react-admin';
+import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, EditProps, ImageField, ImageInput } from 'react-admin';
 
 const Title = (props) => {
     const { record } = props ?? { record: { name: 'None' } };
@@ -9,9 +9,14 @@ const Title = (props) => {
 export const ItemEdit: FC<EditProps> = (props) => (
     <Edit title={<Title />} {...props} undoable={false}>
         <SimpleForm>
+            <ImageField source='image_path' />
             <TextInput source="id" disabled />
             <TextInput source="name" />
-            <TextInput source="image_path" />
+            
+            <ImageInput source='new_photo' accept='image/*'>
+                <ImageField source='image_path' />
+            </ImageInput>
+            
             <TextInput source="props" />
             <TextInput source="description" />
             <TextInput source="category_id" />

@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import { EditButton, TopToolbar, Show, SimpleShowLayout, TextField, ImageField } from 'react-admin';
-import AddressField from './AddressField';
+import { EditButton, TopToolbar, Show, SimpleShowLayout, TextField, ImageField, RichTextField, Datagrid, ReferenceManyField } from 'react-admin';
+import CompanyAddressField from './AddressField';
 
 const PostShowActions = ({ basePath, data, resource }: any) => (
     <TopToolbar>
@@ -28,10 +28,11 @@ export const CompanyShow = (props) => (
             /* aside={<Aside />} */
         >
             <SimpleShowLayout>
-                <ImageField source='logo_path' />
+                <ImageField source='image_path' />
                 <TextField source='full_name' />
                 <TextField source='short_name' />
-                <AddressField />
+                <RichTextField source='description' />
+                <CompanyAddressField />
             </SimpleShowLayout>
         </Show>
     </>

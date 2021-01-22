@@ -21,7 +21,8 @@ export const ArticleCreate = (props) => (
                 <SelectInput optionText="full_name" />
             </ReferenceInput> */}
             {/* <TextInput source="company_id" /> */}
-            <SelectInput source='status' choices={StatusList}/>
+            {/* <SelectInput source='status' choices={StatusList}/> */}
+            <StatusField/>
             <ReferenceInput source="company_id" reference="Company">
                 <SelectInput optionText="full_name" />
             </ReferenceInput>

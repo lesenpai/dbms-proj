@@ -10,7 +10,6 @@ export { EmailController, IEmailJSON } from './Email.controller';
 export { ItemCategoryController, IItemCategoryJSON } from './ItemCategory.controller';
 export { ItemTypeController, IItemTypeJSON } from './ItemType.controller';
 export { ItemController, IItemJSON } from './Item.controller';
-export { OpeningHoursPeriodController, IOpeningHoursPeriodJSON } from './OpeningHoursPeriod.controller';
 export { PhoneController, IPhoneJSON } from './Phone.controller';
 export { RoleController, IRoleJSON } from './Role.controller';
 export { UserController, IUserJSON } from './User.controller';

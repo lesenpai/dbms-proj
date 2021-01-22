@@ -7,7 +7,7 @@ export const UserCreate = (props) => (
         <SimpleForm>
             <AvatarField size='128' />
             <ImageInput source='new_photo' accept='image/*'>
-                <ImageField source='photo_path' />
+                <ImageField source='image_path' />
             </ImageInput>
             
             <TextInput source='id' disabled autoFocus />
@@ -19,7 +19,7 @@ export const UserCreate = (props) => (
             <TextInput source='dob' />
             <TextInput source='phone' />
             <TextInput source='email' />
-            <TextInput source='photo_path' />
+            <TextInput source='image_path' />
             <TextInput source='role_id' />
 
             <ReferenceInput source='role_id' reference='Role'>

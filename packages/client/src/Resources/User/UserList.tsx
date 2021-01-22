@@ -28,7 +28,7 @@ export const UserList = (props) => {
     return (
         <List {...props} exporter={false} perPage={25} bulkActionButtons={false} filters={<MyFilter context='button' />}>
             <Datagrid optimized rowClick='edit'>
-                <TextField source='id' />
+                {/* <TextField source='id' /> */}
                 <FullNameField label='ФИО' />
                 <TextField source='login' />
                 <TextField source='dob' />

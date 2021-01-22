@@ -5,6 +5,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Logo from './Logo';
+import classes from '*.module.css';
 
 const useStyles = makeStyles({
     title: {
@@ -16,6 +17,9 @@ const useStyles = makeStyles({
     spacer: {
         flex: 1,
     },
+    topbar: {
+        backgroundColor: '#FF9632'
+    }
 });
 
 const ConfigurationMenu = forwardRef<any, any>((props, ref) => {
@@ -31,16 +35,19 @@ const ConfigurationMenu = forwardRef<any, any>((props, ref) => {
     );
 });
 
-const CustomUserMenu = (props: any) => (
-    <UserMenu {...props}>
-        <ConfigurationMenu />
-    </UserMenu>
-);
+const CustomUserMenu = (props: any) => {
+    const classes = useStyles();
+    return (
+        <UserMenu {...props} >
+            <ConfigurationMenu/>
+        </UserMenu>
+    );
+};
 
 const CustomAppBar = (props: any) => {
     const classes = useStyles();
     return (
-        <AppBar {...props} userMenu={<CustomUserMenu />}>
+        <AppBar {...props} userMenu={<CustomUserMenu />} className={classes.topbar}>
             <Typography
                 variant="h6"
                 color="inherit"
