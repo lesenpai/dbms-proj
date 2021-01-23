@@ -2,7 +2,7 @@ import { ArticleList } from './ArticleList';
 import { ArticleCreate } from './ArticleCreate';
 import { ArticleEdit } from './ArticleEdit';
 
-import icon from '@material-ui/icons/FiberManualRecord';
+import icon from '@material-ui/icons/Description';
 import { UserRole } from '../../types';
 export const ArticleIcon = icon;
 
@@ -18,6 +18,6 @@ export const articleResource = (permissions) => ({
     create: [...allowedRoles.create].includes(permissions) ? ArticleCreate : null,
     edit: [...allowedRoles.edit].includes(permissions) ? ArticleEdit : null,
 
-    icon,
+    icon: ArticleIcon,
     name: 'Article',
 });

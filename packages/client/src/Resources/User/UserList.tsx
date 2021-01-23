@@ -17,6 +17,7 @@ import { stringify } from 'query-string';
 import { ExpandLess } from '@material-ui/icons';
 import CheckRole from '../../components/CheckRole';
 import { allowedRoles } from '.';
+import { getUserRole } from '../../modules/UserModule';
 
 const MyFilter: FC<Omit<FilterProps, 'children'>> = (props) => (
     <Filter {...props}>
@@ -38,7 +39,7 @@ export const UserList = (props) => {
                 <ReferenceField source='role_id' reference='Role'>
                     <TextField source='name' />
                 </ReferenceField>
-                <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
+                <CheckRole permissions={getUserRole()} allowed={allowedRoles.edit}>
                     <EditButton />
                 </CheckRole>
             </Datagrid>

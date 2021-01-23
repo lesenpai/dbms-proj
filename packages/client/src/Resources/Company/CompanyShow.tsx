@@ -1,11 +1,16 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 import { EditButton, TopToolbar, Show, SimpleShowLayout, TextField, ImageField, RichTextField, Datagrid, ReferenceManyField } from 'react-admin';
+import { allowedRoles } from '.';
+import CheckRole from '../../components/CheckRole';
 import CompanyAddressField from './AddressField';
+import { getUserRole } from '../../modules/UserModule';
 
-const PostShowActions = ({ basePath, data, resource }: any) => (
+const PostShowActions = ({ basePath, data, resource, permissions }: any) => (
     <TopToolbar>
-        <EditButton basePath={basePath} record={data} />
+        <CheckRole permissions={getUserRole()} allowed={allowedRoles.show}>
+            <EditButton basePath={basePath} record={data} />
+        </CheckRole>
         {/* Add your custom actions */}
         {/* <Button color="primary" onClick={customAction}>Custom Action</Button> */}
     </TopToolbar>

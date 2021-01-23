@@ -2,7 +2,7 @@ import { RoleList } from './RoleList';
 import { RoleCreate } from './RoleCreate';
 import { RoleEdit } from './RoleEdit';
 
-import icon from '@material-ui/icons/FiberManualRecord';
+import icon from '@material-ui/icons/PermIdentity';
 import { UserRole } from '../../types';
 export const RoleIcon = icon;
 
@@ -18,6 +18,6 @@ export const roleResource = (permissions) => ({
     create: [...allowedRoles.create].includes(permissions) ? RoleCreate : null,
     edit: [...allowedRoles.edit].includes(permissions) ? RoleEdit : null,
 
-    icon,
+    icon: RoleIcon,
     name: 'Role',
 });

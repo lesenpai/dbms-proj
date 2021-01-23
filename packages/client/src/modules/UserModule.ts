@@ -1,6 +1,10 @@
 import decodeJwt from 'jwt-decode';
 import store from '../store';
-import { roleAttributes, IUserModel } from '../types';
+import { roleAttributes, IUserModel, UserRole } from '../types';
+
+export function getUserRole(): UserRole {
+    return store.getState().UserModule?.role_id;
+}
 
 // User class
 export class User implements IUserModel {

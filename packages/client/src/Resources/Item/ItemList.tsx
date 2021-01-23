@@ -19,6 +19,9 @@ import {
 import { stringify } from 'query-string';
 import { ExpandLess } from '@material-ui/icons';
 import AvatarField from '../User/AvatarField';
+import CheckRole from '../../components/CheckRole';
+import { getUserRole } from '../../modules/UserModule';
+import { allowedRoles } from '../Admin';
 
 const ItemCategoryPreloader = (props) => {
     const version = useVersion();
@@ -82,7 +85,9 @@ export const ItemList = (props) => {
                     <TextField source='name' />
                 </ReferenceField>
 
-                <EditButton />
+                <CheckRole permissions={getUserRole()} allowed={allowedRoles.edit}>
+                    <EditButton />
+                </CheckRole>
             </Datagrid>
         </List>
     );

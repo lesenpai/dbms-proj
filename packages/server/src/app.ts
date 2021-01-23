@@ -6,6 +6,7 @@ import Sequelize from 'sequelize';
 import { appLogging } from './tools/appLogging';
 import './database';
 import apiRoutes from './routes/api';
+import Path from 'path';
 
 // Error handler
 const errHandler: ErrorRequestHandler = (err, req, res, next) => {
@@ -53,6 +54,7 @@ const errHandler: ErrorRequestHandler = (err, req, res, next) => {
 export async function createApp() {
     const app = express();
 
+    let buildClientPath = Path.join(__dirname, '../../client/build');
     app
         // Backend middleware
         .use((req, res, next) => {
@@ -61,16 +63,21 @@ export async function createApp() {
         })
         .use(appLogging())
         .use(cors())
-
+        
         .use('/api', apiRoutes)
         .use('/uploads', express.static('./uploads'))
+        
+        .use(express.static(buildClientPath))
 
-        // Default 404
-        .use((req, res, next) => {
-            next(Boom.notFound());
+        app.get('/*', (req, res) => {
+            res.sendFile(buildClientPath + '/index.html');
         })
+            // Default 404
+            /* .use((req, res, next) => {
+            next(Boom.notFound());
+        }) */
 
-        .use(errHandler);
+            .use(errHandler);
 
     return app;
 }

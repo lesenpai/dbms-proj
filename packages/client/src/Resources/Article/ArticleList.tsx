@@ -21,6 +21,7 @@ import {
 import { allowedRoles } from '.';
 import CheckRole from '../../components/CheckRole';
 import StatusField from '../../components/StatusField';
+import { getUserRole } from '../../modules/UserModule';
 import AvatarField from '../User/AvatarField';
 // import { ImportButton } from 'react-admin-import-csv';
 
@@ -113,7 +114,10 @@ export const ArticleList = (props) => {
 
                 <TextField source='date' />
                 <StatusField />
-                <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
+                {/* <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
+                    <EditButton />
+                </CheckRole> */}
+                <CheckRole permissions={getUserRole()} allowed={allowedRoles.edit}>
                     <EditButton />
                 </CheckRole>
             </Datagrid>

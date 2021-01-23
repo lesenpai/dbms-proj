@@ -2,7 +2,7 @@ import { ActivityList } from './ActivityList';
 import { ActivityCreate } from './ActivityCreate';
 import { ActivityEdit } from './ActivityEdit';
 
-import icon from '@material-ui/icons/FiberManualRecord';
+import icon from '@material-ui/icons/ClearAll';
 import { UserRole } from '../../types';
 export const ActivityIcon = icon;
 

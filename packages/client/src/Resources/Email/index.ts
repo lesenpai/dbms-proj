@@ -2,7 +2,7 @@ import { EmailList } from './EmailList';
 import { EmailCreate } from './EmailCreate';
 import { EmailEdit } from './EmailEdit';
 
-import icon from '@material-ui/icons/FiberManualRecord';
+import icon from '@material-ui/icons/AlternateEmail';
 import { UserRole } from '../../types';
 export const EmailIcon = icon;
 
@@ -18,6 +18,6 @@ export const emailResource = (permissions) => ({
     create: [...allowedRoles.create].includes(permissions) ? EmailCreate : null,
     edit: [...allowedRoles.edit].includes(permissions) ? EmailEdit : null,
 
-    icon,
+    icon: EmailIcon,
     name: 'Email',
 });

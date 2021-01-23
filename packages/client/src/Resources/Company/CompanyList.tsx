@@ -27,6 +27,7 @@ import { stringify } from 'query-string';
 import { ExpandLess } from '@material-ui/icons';
 import CheckRole from '../../components/CheckRole';
 import { allowedRoles } from '.';
+import { getUserRole } from '../../modules/UserModule';
 
 
 const cardStyle = {
@@ -69,8 +70,9 @@ const CompanyGrid = (props) => {
                         >
                             <EditButton resource='Company' basePath={basePath} record={data[id]} />
                         </CheckRole> */}
-                        <EditButton resource='Company' basePath={basePath} record={data[id]} />
-
+                        <CheckRole permissions={getUserRole()} allowed={allowedRoles.show}>
+                            <EditButton resource='Company' basePath={basePath} record={data[id]} />
+                        </CheckRole>
                         <ShowButton resource='Company' basePath={basePath} record={data[id]} />
                     </CardActions>
                 </Card>

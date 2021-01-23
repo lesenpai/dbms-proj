@@ -1,7 +1,10 @@
 import React, { FC } from 'react';
 import { List, Datagrid, TextField, EditButton, ReferenceField, FilterProps, Filter, TextInput, ReferenceInput, SelectInput } from 'react-admin';
+import CheckRole from '../../components/CheckRole';
 import StatusField from '../../components/StatusField';
 import TextFieldEmpty from '../../components/TextFieldEmpty';
+import { getUserRole } from '../../modules/UserModule';
+import { allowedRoles } from '../Admin';
 import AvatarField from '../User/AvatarField';
 
 const MyFilter: FC<Omit<FilterProps, 'children'>> = (props) => (
@@ -44,7 +47,9 @@ export const Company2ItemList = (props) => {
                     <TextField source='full_name' />
                 </ReferenceField>
                 <StatusField />
-                <EditButton />
+                <CheckRole permissions={getUserRole()} allowed={allowedRoles.edit}>
+                    <EditButton />
+                </CheckRole>
             </Datagrid>
         </List>
     );
