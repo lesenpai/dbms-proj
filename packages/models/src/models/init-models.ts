@@ -15,6 +15,8 @@ import { Company2Activity } from "./Company2Activity";
 import type { Company2ActivityAttributes, Company2ActivityCreationAttributes } from "./Company2Activity";
 import { Company2Item } from "./Company2Item";
 import type { Company2ItemAttributes, Company2ItemCreationAttributes } from "./Company2Item";
+import { Company2SocialNetwork } from "./Company2SocialNetwork";
+import type { Company2SocialNetworkAttributes, Company2SocialNetworkCreationAttributes } from "./Company2SocialNetwork";
 import { Email } from "./Email";
 import type { EmailAttributes, EmailCreationAttributes } from "./Email";
 import { Item } from "./Item";
@@ -23,14 +25,16 @@ import { ItemCategory } from "./ItemCategory";
 import type { ItemCategoryAttributes, ItemCategoryCreationAttributes } from "./ItemCategory";
 import { ItemType } from "./ItemType";
 import type { ItemTypeAttributes, ItemTypeCreationAttributes } from "./ItemType";
-import { OpeningHoursPeriod } from "./OpeningHoursPeriod";
-import type { OpeningHoursPeriodAttributes, OpeningHoursPeriodCreationAttributes } from "./OpeningHoursPeriod";
 import { Phone } from "./Phone";
 import type { PhoneAttributes, PhoneCreationAttributes } from "./Phone";
 import { Role } from "./Role";
 import type { RoleAttributes, RoleCreationAttributes } from "./Role";
+import { SocialNetwork } from "./SocialNetwork";
+import type { SocialNetworkAttributes, SocialNetworkCreationAttributes } from "./SocialNetwork";
 import { User } from "./User";
 import type { UserAttributes, UserCreationAttributes } from "./User";
+import { WorkingHours } from "./WorkingHours";
+import type { WorkingHoursAttributes, WorkingHoursCreationAttributes } from "./WorkingHours";
 
 export {
   Activity,
@@ -41,14 +45,16 @@ export {
   Company,
   Company2Activity,
   Company2Item,
+  Company2SocialNetwork,
   Email,
   Item,
   ItemCategory,
   ItemType,
-  OpeningHoursPeriod,
   Phone,
   Role,
+  SocialNetwork,
   User,
+  WorkingHours,
 };
 
 export type {
@@ -68,6 +74,8 @@ export type {
   Company2ActivityCreationAttributes,
   Company2ItemAttributes,
   Company2ItemCreationAttributes,
+  Company2SocialNetworkAttributes,
+  Company2SocialNetworkCreationAttributes,
   EmailAttributes,
   EmailCreationAttributes,
   ItemAttributes,
@@ -76,14 +84,16 @@ export type {
   ItemCategoryCreationAttributes,
   ItemTypeAttributes,
   ItemTypeCreationAttributes,
-  OpeningHoursPeriodAttributes,
-  OpeningHoursPeriodCreationAttributes,
   PhoneAttributes,
   PhoneCreationAttributes,
   RoleAttributes,
   RoleCreationAttributes,
+  SocialNetworkAttributes,
+  SocialNetworkCreationAttributes,
   UserAttributes,
   UserCreationAttributes,
+  WorkingHoursAttributes,
+  WorkingHoursCreationAttributes,
 };
 
 export function initModels(sequelize: Sequelize) {
@@ -95,14 +105,16 @@ export function initModels(sequelize: Sequelize) {
   Company.initModel(sequelize);
   Company2Activity.initModel(sequelize);
   Company2Item.initModel(sequelize);
+  Company2SocialNetwork.initModel(sequelize);
   Email.initModel(sequelize);
   Item.initModel(sequelize);
   ItemCategory.initModel(sequelize);
   ItemType.initModel(sequelize);
-  OpeningHoursPeriod.initModel(sequelize);
   Phone.initModel(sequelize);
   Role.initModel(sequelize);
+  SocialNetwork.initModel(sequelize);
   User.initModel(sequelize);
+  WorkingHours.initModel(sequelize);
 
   Admin.belongsTo(User, { foreignKey: "user_id"});
   User.hasMany(Admin, { foreignKey: "user_id"});
@@ -120,6 +132,10 @@ export function initModels(sequelize: Sequelize) {
   Company.hasMany(Company2Item, { foreignKey: "company_id"});
   Company2Item.belongsTo(Item, { foreignKey: "item_id"});
   Item.hasMany(Company2Item, { foreignKey: "item_id"});
+  Company2SocialNetwork.belongsTo(Company, { foreignKey: "company_id"});
+  Company.hasMany(Company2SocialNetwork, { foreignKey: "company_id"});
+  Company2SocialNetwork.belongsTo(SocialNetwork, { foreignKey: "network_id"});
+  SocialNetwork.hasMany(Company2SocialNetwork, { foreignKey: "network_id"});
   Email.belongsTo(Company, { foreignKey: "company_id"});
   Company.hasMany(Email, { foreignKey: "company_id"});
   Item.belongsTo(ItemCategory, { foreignKey: "category_id"});
@@ -128,12 +144,12 @@ export function initModels(sequelize: Sequelize) {
   ItemType.hasMany(Item, { foreignKey: "item_type_id"});
   ItemCategory.belongsTo(ItemCategory, { foreignKey: "parent_category_id"});
   ItemCategory.hasMany(ItemCategory, { foreignKey: "parent_category_id"});
-  OpeningHoursPeriod.belongsTo(Company, { foreignKey: "company_id"});
-  Company.hasMany(OpeningHoursPeriod, { foreignKey: "company_id"});
   Phone.belongsTo(Company, { foreignKey: "company_id"});
   Company.hasMany(Phone, { foreignKey: "company_id"});
   User.belongsTo(Role, { foreignKey: "role_id"});
   Role.hasMany(User, { foreignKey: "role_id"});
+  WorkingHours.belongsTo(Company, { foreignKey: "company_id"});
+  Company.hasMany(WorkingHours, { foreignKey: "company_id"});
 
   return {
     Activity: Activity,
@@ -144,13 +160,15 @@ export function initModels(sequelize: Sequelize) {
     Company: Company,
     Company2Activity: Company2Activity,
     Company2Item: Company2Item,
+    Company2SocialNetwork: Company2SocialNetwork,
     Email: Email,
     Item: Item,
     ItemCategory: ItemCategory,
     ItemType: ItemType,
-    OpeningHoursPeriod: OpeningHoursPeriod,
     Phone: Phone,
     Role: Role,
+    SocialNetwork: SocialNetwork,
     User: User,
+    WorkingHours: WorkingHours,
   };
 }

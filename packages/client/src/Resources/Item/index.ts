@@ -2,7 +2,7 @@ import { ItemList } from './ItemList';
 import { ItemCreate } from './ItemCreate';
 import { ItemEdit } from './ItemEdit';
 
-import icon from '@material-ui/icons/FiberManualRecord';
+import icon from '@material-ui/icons/Store';
 import { UserRole } from '../../types';
 export const ItemIcon = icon;
 
@@ -18,6 +18,6 @@ export const itemResource = (permissions) => ({
     create: [...allowedRoles.create].includes(permissions) ? ItemCreate : null,
     edit: [...allowedRoles.edit].includes(permissions) ? ItemEdit : null,
 
-    icon,
+    icon: ItemIcon,
     name: 'Item',
 });

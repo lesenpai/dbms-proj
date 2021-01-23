@@ -12,14 +12,24 @@ import {
     Filter,
     FilterProps,
     TextInput,
+    ReferenceInput,
+    SelectInput,
 } from 'react-admin';
 import { stringify } from 'query-string';
 import { ExpandLess } from '@material-ui/icons';
+import AvatarField from '../User/AvatarField';
+import CheckRole from '../../components/CheckRole';
+import { getUserRole } from '../../modules/UserModule';
+import { allowedRoles } from '../Admin';
 
 
 const MyFilter: FC<Omit<FilterProps, 'children'>> = (props) => (
     <Filter {...props}>
         <TextInput label='Search' source='q' alwaysOn />
+
+        <ReferenceInput source='company_id' reference='Company' sort={{ field: 'id', order: 'asc' }}>
+            <SelectInput optionText='full_name' />
+        </ReferenceInput>
     </Filter>
 );
 
@@ -33,14 +43,22 @@ export const EmailList = (props) => {
             {...props}
         >
             <Datagrid optimized rowClick='edit'>
-                <TextField source='id' />
-                <TextField source='addr' />
-                <TextFieldEmpty source='description' />
-                <StatusField />
+                {/* <TextField source='id' /> */}
+
+                <ReferenceField source='company_id' reference='Company'>
+                    <AvatarField size='64' source='image_path' />
+                </ReferenceField>
                 <ReferenceField source='company_id' reference='Company'>
                     <TextField source='full_name' />
                 </ReferenceField>
-                <EditButton />
+                <TextField source='addr' />
+
+                <TextFieldEmpty source='description' />
+                <StatusField />
+
+                <CheckRole permissions={getUserRole()} allowed={allowedRoles.edit}>
+                    <EditButton />
+                </CheckRole>
             </Datagrid>
         </List>
     );

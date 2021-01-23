@@ -61,7 +61,7 @@ export class UserController extends Controller {
                 'dob',
                 'phone',
                 'email',
-                'photo_path',
+                'image_path',
                 'role_id',
             ],
             include: [
@@ -110,7 +110,7 @@ export class UserController extends Controller {
                 dob: uData.dob,
                 phone: uData.phone,
                 email: uData.email,
-                photo_path: uData.photo_path,
+                image_path: uData.image_path,
                 role_id: uData.role_id,
                 role: uData.Role
             },

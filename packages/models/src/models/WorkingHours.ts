@@ -1,50 +1,38 @@
 import Sequelize, { DataTypes, Model, Optional } from 'sequelize';
 import type { Company, CompanyId } from './Company';
 
-export interface OpeningHoursPeriodAttributes {
+export interface WorkingHoursAttributes {
   id: number;
-  first_day_id: number;
-  last_day_id: number;
   start_time: string;
   end_time: string;
+  short_day_end_time?: string;
   company_id: number;
-  status: number;
 }
 
-export type OpeningHoursPeriodPk = "id";
-export type OpeningHoursPeriodId = OpeningHoursPeriod[OpeningHoursPeriodPk];
-export type OpeningHoursPeriodCreationAttributes = Optional<OpeningHoursPeriodAttributes, OpeningHoursPeriodPk>;
+export type WorkingHoursPk = "id";
+export type WorkingHoursId = WorkingHours[WorkingHoursPk];
+export type WorkingHoursCreationAttributes = Optional<WorkingHoursAttributes, WorkingHoursPk>;
 
-export class OpeningHoursPeriod extends Model<OpeningHoursPeriodAttributes, OpeningHoursPeriodCreationAttributes> implements OpeningHoursPeriodAttributes {
+export class WorkingHours extends Model<WorkingHoursAttributes, WorkingHoursCreationAttributes> implements WorkingHoursAttributes {
   id!: number;
-  first_day_id!: number;
-  last_day_id!: number;
   start_time!: string;
   end_time!: string;
+  short_day_end_time?: string;
   company_id!: number;
-  status!: number;
 
-  // OpeningHoursPeriod belongsTo Company
+  // WorkingHours belongsTo Company
   Company!: Company;
   getCompany!: Sequelize.BelongsToGetAssociationMixin<Company>;
   setCompany!: Sequelize.BelongsToSetAssociationMixin<Company, CompanyId>;
   createCompany!: Sequelize.BelongsToCreateAssociationMixin<Company>;
 
-  static initModel(sequelize: Sequelize.Sequelize): typeof OpeningHoursPeriod {
-    OpeningHoursPeriod.init({
+  static initModel(sequelize: Sequelize.Sequelize): typeof WorkingHours {
+    WorkingHours.init({
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
-    },
-    first_day_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    last_day_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     },
     start_time: {
       type: DataTypes.TIME,
@@ -54,6 +42,10 @@ export class OpeningHoursPeriod extends Model<OpeningHoursPeriodAttributes, Open
       type: DataTypes.TIME,
       allowNull: false
     },
+    short_day_end_time: {
+      type: DataTypes.TIME,
+      allowNull: true
+    },
     company_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -61,20 +53,15 @@ export class OpeningHoursPeriod extends Model<OpeningHoursPeriodAttributes, Open
         model: 'Company',
         key: 'id'
       }
-    },
-    status: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 1
     }
   }, {
     sequelize,
-    tableName: 'OpeningHoursPeriod',
+    tableName: 'WorkingHours',
     schema: 'dbo',
     timestamps: false,
     indexes: [
       {
-        name: "PK__OpeningH__3213E83F22956F7C",
+        name: "PK__WorkingH__3213E83F314547F5",
         unique: true,
         fields: [
           { name: "id" },
@@ -82,6 +69,6 @@ export class OpeningHoursPeriod extends Model<OpeningHoursPeriodAttributes, Open
       },
     ]
   });
-  return OpeningHoursPeriod;
+  return WorkingHours;
   }
 }

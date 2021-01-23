@@ -7,10 +7,10 @@ export const CompanyCreate = (props) => (
             <TextInput source="id" disabled autoFocus />
             <TextInput source="full_name" />
             <TextInput source="short_name" />
-            {/* <TextInput source="logo_path" /> */}
+            {/* <TextInput source="image_path" /> */}
             
             <ImageInput source='new_photo' accept='image/*'>
-                <ImageField source='logo_path' />
+                <ImageField source='image_path' />
             </ImageInput>
 
             <TextInput source="country" />

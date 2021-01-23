@@ -17,7 +17,7 @@ const validParams = {
     user: [
         'password',
         'login',
-        'photo_path',
+        'image_path',
         'name',
         'last_name',
         'second_name',
@@ -67,31 +67,7 @@ export const dataProvider = {
 
     create: async (resource, params) => {
         const { data } = params;
-        if (resource === 'User' && data.new_photo?.rawFile) {
-            const { new_photo } = data;
-            data.new_photo = undefined;
-            try {
-                const isNewPhoto = new_photo.rawFile instanceof File;
-                if (isNewPhoto) {
-                    const [img] = await uploadImages([new_photo]);
-                    data.photo_path = `${Backend.serverURL}/${img.path}`;
-                }
-            } catch (e) {
-                // TODO: Show notify with error
-            }
-        } else if (resource === 'Company' && data.new_photo?.rawFile) {
-            const { new_photo } = data;
-            data.new_photo = undefined;
-            try {
-                const isNewPhoto = new_photo.rawFile instanceof File;
-                if (isNewPhoto) {
-                    const [img] = await uploadImages([new_photo]);
-                    data.logo_path = `${Backend.serverURL}/${img.path}`;
-                }
-            } catch (e) {
-                // TODO: Show notify with error
-            }
-        } else if (resource === 'Article' && data.new_photo?.rawFile) {
+        if (/* resource === 'User' &&  */data.new_photo?.rawFile) {
             const { new_photo } = data;
             data.new_photo = undefined;
             try {
@@ -103,7 +79,19 @@ export const dataProvider = {
             } catch (e) {
                 // TODO: Show notify with error
             }
-        }
+        } else if (/* resource === 'Company' && */ data.new_photo?.rawFile) {
+            const { new_photo } = data;
+            data.new_photo = undefined;
+            try {
+                const isNewPhoto = new_photo.rawFile instanceof File;
+                if (isNewPhoto) {
+                    const [img] = await uploadImages([new_photo]);
+                    data.image_path = `${Backend.serverURL}/${img.path}`;
+                }
+            } catch (e) {
+                // TODO: Show notify with error
+            }
+        } 
 
         return Backend.request(`${resource}`, data, 'POST').then((data) => ({
             data,
@@ -135,33 +123,10 @@ export const dataProvider = {
 
     update: async (resource, params) => {
         const { data } = params;
-        console.log(resource, data);
+        console.warn('UPDATE');
         
-        if (resource === 'User' && data.new_photo?.rawFile) {
-            const { new_photo } = data;
-            data.new_photo = undefined;
-            try {
-                const isNewPhoto = new_photo.rawFile instanceof File;
-                if (isNewPhoto) {
-                    const [img] = await uploadImages([new_photo]);
-                    data.photo_path = `${Backend.serverURL}/${img.path}`;
-                }
-            } catch (e) {
-                // TODO: Show notify with error
-            }
-        } else if (resource === 'Company' && data.new_photo?.rawFile) {
-            const { new_photo } = data;
-            data.new_photo = undefined;
-            try {
-                const isNewPhoto = new_photo.rawFile instanceof File;
-                if (isNewPhoto) {
-                    const [img] = await uploadImages([new_photo]);
-                    data.logo_path = `${Backend.serverURL}/${img.path}`;
-                }
-            } catch (e) {
-                // TODO: Show notify with error
-            }
-        } else if (resource === 'Article' && data.new_photo?.rawFile) {
+        if (/* resource === 'Item' && */ data.new_photo?.rawFile) {
+            console.log('------------------------------UPDATE');
             const { new_photo } = data;
             data.new_photo = undefined;
             try {

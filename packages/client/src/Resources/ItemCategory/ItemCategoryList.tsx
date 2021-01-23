@@ -3,6 +3,9 @@ import { List, Datagrid, TextField, EditButton, ReferenceField, Button, Referenc
 import { Link } from 'react-admin';
 import { stringify } from 'query-string';
 import LinkToRelatedItems from '../../components/LinkToRelatedItems';
+import CheckRole from '../../components/CheckRole';
+import { getUserRole } from '../../modules/UserModule';
+import { allowedRoles } from '../Admin';
 
 const Expand = (props) => (
     <ReferenceManyField {...props} reference='Item' target='category_id'>
@@ -45,7 +48,9 @@ export const ItemCategoryList = (props) => {
             >
                 <TextField source='id' />
                 <LinkToCategory />
-                <EditButton />
+                <CheckRole permissions={getUserRole()} allowed={allowedRoles.edit}>
+                    <EditButton />
+                </CheckRole>
             </Datagrid>
         </List>
     );

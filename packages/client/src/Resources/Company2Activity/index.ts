@@ -2,7 +2,7 @@ import { Company2ActivityList } from './Company2ActivityList';
 import { Company2ActivityCreate } from './Company2ActivityCreate';
 import { Company2ActivityEdit } from './Company2ActivityEdit';
 
-import icon from '@material-ui/icons/FiberManualRecord';
+import icon from '@material-ui/icons/ListAlt';
 import { UserRole } from '../../types';
 export const Company2ActivityIcon = icon;
 
@@ -18,6 +18,6 @@ export const company2activityResource = (permissions) => ({
     create: [...allowedRoles.create].includes(permissions) ? Company2ActivityCreate : null,
     edit: [...allowedRoles.edit].includes(permissions) ? Company2ActivityEdit : null,
 
-    icon,
+    icon: Company2ActivityIcon,
     name: 'Company2Activity',
 });

@@ -36,7 +36,7 @@ export class CompanyController extends Controller {
 
     public static fullAttr(safe = true, urole?: UserRole, deep = 0): FindOptions<CompanyAttributes> {
         return {
-            attributes: ['id', 'full_name', 'short_name', 'logo_path', 'country', 'city', 'street', 'building', 'office', 'description', 'url'],
+            attributes: ['id', 'full_name', 'short_name', 'image_path', 'country', 'city', 'street', 'building', 'office', 'description', 'url'],
             include: [],
         };
     }

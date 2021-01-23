@@ -23,6 +23,7 @@ import { stringify } from 'query-string';
 import { ExpandLess } from '@material-ui/icons';
 import CheckRole from '../../components/CheckRole';
 import { allowedRoles } from '.';
+import { getUserRole } from '../../modules/UserModule';
 
 const Expand = (props) => (
     <ReferenceManyField {...props} reference='Company2Activity' target='activity_id'>
@@ -72,9 +73,12 @@ export const ActivityList = (props) => {
             filters={<MyFilter context='button' />}
         >
             <Datagrid optimized rowClick='edit' expand={<Expand />}>
-                <TextField source='id' />
+                {/* <TextField source='id' /> */}
                 <TextField source='name' /*  label={translate('resources.Activity.fields.full_name') }*/ />
-                <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
+                {/* <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
+                    <EditButton />
+                </CheckRole> */}
+                <CheckRole permissions={getUserRole()} allowed={allowedRoles.edit}>
                     <EditButton />
                 </CheckRole>
             </Datagrid>

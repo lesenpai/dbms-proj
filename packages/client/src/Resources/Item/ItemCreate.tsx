@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
-import { Create, ReferenceInput, SelectInput, SimpleForm, TextInput, useDataProvider, useVersion } from 'react-admin';
+import { Create, ImageField, ImageInput, ReferenceInput, SelectInput, SimpleForm, TextInput, useDataProvider, useVersion } from 'react-admin';
 
 /* const ItemCategoryPreloader = (dataProvider) => (record) => {
     console.log('record', record);
@@ -37,7 +37,10 @@ export const ItemCreate = (props) => {
             <SimpleForm>
                 <TextInput source='id' disabled autoFocus />
                 <TextInput source='name' />
-                <TextInput source='image_path' />
+                {/* <TextInput source='image_path' /> */}
+                <ImageInput source='new_photo' accept='image/*'>
+                    <ImageField source='image_path' />
+                </ImageInput>
                 <TextInput source='props' />
                 <TextInput source='description' />
                 <TextInput source='category_id' />
@@ -45,7 +48,7 @@ export const ItemCreate = (props) => {
 
                 <ReferenceInput source='category_id' reference='ItemCategory'>
                     {/* <SelectInput optionText={ItemCategoryPreloader(dataProvider)} /> */}
-                    <SelectInput optionText="name" />
+                    <SelectInput optionText='name' />
                 </ReferenceInput>
 
                 <ReferenceInput source='item_type_id' reference='ItemType'>

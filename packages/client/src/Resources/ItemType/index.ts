@@ -19,6 +19,6 @@ export const itemtypeResource = (permissions) => ({
     create: [...allowedRoles.create].includes(permissions) ? ItemTypeCreate : null,
     edit: [...allowedRoles.edit].includes(permissions) ? ItemTypeEdit : null,
 
-    icon,
+    icon: ItemTypeIcon,
     name: 'ItemType',
 });

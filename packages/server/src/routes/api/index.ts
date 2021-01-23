@@ -17,13 +17,14 @@ import {
     EmailController,
     ItemCategoryController,
     ItemTypeController,
-    OpeningHoursPeriodController,
     PhoneController,
     RoleController,
     UserController,
 } from '../../controllers';
 import { ItemController } from '../../controllers/Item.controller';
 import { userInfo } from 'os';
+import { SocialNetworkController } from '../../controllers/SocialNetwork.controller';
+import { WorkingHoursController } from '../../controllers/WorkingHours.controller';
 
 const router = Router();
 
@@ -212,20 +213,6 @@ router.use(
 );
 
 router.use(
-    '/openinghoursperiod',
-    authType.required,
-    crud(OpeningHoursPeriodController, {
-        // disabledActions: [Action.CREATE, Action.GET_LIST, Action.GET_ONE, Action.UPDATE, Action.DELETE],
-        actions: {
-            [Action.CREATE]: [UserRole.ADMIN, UserRole.AGENT],
-            [Action.DELETE]: [UserRole.ADMIN, UserRole.AGENT],
-            [Action.UPDATE]: [UserRole.ADMIN, UserRole.AGENT],
-        },
-        defaultRoles
-    })
-);
-
-router.use(
     '/phone',
     authType.required,
     crud(PhoneController, {
@@ -244,6 +231,32 @@ router.use(
     authType.required,
     crud(RoleController, {
         // disabledActions: [Action.CREATE, Action.GET_LIST, Action.GET_ONE, Action.UPDATE, Action.DELETE],
+        actions: {
+            [Action.CREATE]: [UserRole.ADMIN],
+            [Action.DELETE]: [UserRole.ADMIN],
+            [Action.UPDATE]: [UserRole.ADMIN],
+        },
+        defaultRoles
+    })
+);
+
+router.use(
+    '/socialnetwork',
+    authType.required,
+    crud(SocialNetworkController, {
+        actions: {
+            [Action.CREATE]: [UserRole.ADMIN],
+            [Action.DELETE]: [UserRole.ADMIN],
+            [Action.UPDATE]: [UserRole.ADMIN],
+        },
+        defaultRoles
+    })
+);
+
+router.use(
+    '/workinghours',
+    authType.required,
+    crud(WorkingHoursController, {
         actions: {
             [Action.CREATE]: [UserRole.ADMIN],
             [Action.DELETE]: [UserRole.ADMIN],

@@ -32,7 +32,7 @@ const AvatarField: FC<Props> = ({ record, size = '25', className, source }) => {
 };
 
 AvatarField.defaultProps = {
-    source: 'photo_path',
-    label: 'resources.user.fields.photo_path',
+    source: 'image_path',
+    label: 'resources.user.fields.image_path',
 };
 export default memo<Props>(AvatarField);

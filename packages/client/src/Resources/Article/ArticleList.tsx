@@ -21,6 +21,7 @@ import {
 import { allowedRoles } from '.';
 import CheckRole from '../../components/CheckRole';
 import StatusField from '../../components/StatusField';
+import { getUserRole } from '../../modules/UserModule';
 import AvatarField from '../User/AvatarField';
 // import { ImportButton } from 'react-admin-import-csv';
 
@@ -55,15 +56,10 @@ const MyFilter: FC<Omit<FilterProps, 'children'>> = (props) => (
         <ReferenceInput source='company_id' reference='Company' sort={{ field: 'full_name', order: 'asc' }}>
             <SelectInput optionText='full_name' />
         </ReferenceInput>
-
-        {/* <ReferenceInput source='schedule_id' reference='schedule' sort={{ field: 'id', order: 'ASC' }}>
-            <SelectInput
-                // optionText={ScheduleTitle}
-            />
-        </ReferenceInput> */}
     </Filter>
 );
 
+//todo: добавить create
 const ListActions = (props) => {
     const { className, basePath, total, resource, currentSort /* , exporter */ } = props;
     return (
@@ -107,10 +103,10 @@ export const ArticleList = (props) => {
             filters={<MyFilter context='button' />}
         >
             <Datagrid optimized rowClick='edit' expand={<Expand />}>
-                <TextField source='id' />
-                <TextField source='title' />
+                {/* <TextField source='id' /> */}
                 {/* @ts-ignore */}
                 <AvatarField size='128' source='image_path' />
+                <TextField source='title' />
 
                 <ReferenceField source='company_id' reference='Company' link='show'>
                     <TextField source='full_name' />
@@ -118,7 +114,10 @@ export const ArticleList = (props) => {
 
                 <TextField source='date' />
                 <StatusField />
-                <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
+                {/* <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
+                    <EditButton />
+                </CheckRole> */}
+                <CheckRole permissions={getUserRole()} allowed={allowedRoles.edit}>
                     <EditButton />
                 </CheckRole>
             </Datagrid>

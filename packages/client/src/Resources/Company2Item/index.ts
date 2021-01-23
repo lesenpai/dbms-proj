@@ -1,8 +1,7 @@
 import { Company2ItemList } from './Company2ItemList';
 import { Company2ItemCreate } from './Company2ItemCreate';
 import { Company2ItemEdit } from './Company2ItemEdit';
-
-import icon from '@material-ui/icons/FiberManualRecord';
+import icon from '@material-ui/icons/ShopTwo';
 import { UserRole } from '../../types';
 export const Company2ItemIcon = icon;
 
@@ -10,7 +9,7 @@ export const allowedRoles = {
     list: [UserRole.ADMIN, UserRole.AGENT, UserRole.VISITOR],
     create: [UserRole.ADMIN, UserRole.AGENT],
     edit: [UserRole.ADMIN, UserRole.AGENT],
-    fields: [UserRole.ADMIN],
+    fields: [UserRole.ADMIN]
 };
 
 export const company2itemResource = (permissions) => ({
