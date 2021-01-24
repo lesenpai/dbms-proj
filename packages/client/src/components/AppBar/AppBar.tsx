@@ -16,9 +16,6 @@ const useStyles = makeStyles({
     },
     spacer: {
         flex: 1,
-    },
-    topbar: {
-        backgroundColor: '#FF9632'
     }
 });
 
@@ -47,7 +44,7 @@ const CustomUserMenu = (props: any) => {
 const CustomAppBar = (props: any) => {
     const classes = useStyles();
     return (
-        <AppBar {...props} userMenu={<CustomUserMenu />} className={classes.topbar}>
+        <AppBar {...props} userMenu={<CustomUserMenu />}>
             <Typography
                 variant="h6"
                 color="inherit"

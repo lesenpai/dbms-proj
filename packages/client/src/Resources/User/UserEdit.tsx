@@ -15,7 +15,7 @@ export const UserEdit: FC<EditProps> = (props) => (
                 <ImageField source="image_path" />
             </ImageInput>
 
-            <TextInput source="id" disabled />
+            {/* <TextInput source="id" disabled /> */}
             <TextInput source="login" />
             <TextInput source="password" />
             <TextInput source="surname" />

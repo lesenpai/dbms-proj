@@ -4,7 +4,7 @@ import { Create, ReferenceInput, SelectInput, SimpleForm, TextInput } from 'reac
 export const Company2ItemCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="id" disabled autoFocus />
+            {/* <TextInput source="id" disabled autoFocus /> */}
             <TextInput source="price" />
             <TextInput source="description" />
             <TextInput source="status" />

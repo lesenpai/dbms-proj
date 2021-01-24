@@ -11,7 +11,7 @@ const Title = (props) => {
 export const AdminEdit: FC<EditProps> = (props) => (
     <Edit title={<Title />} {...props}>
         <SimpleForm>
-            <TextInput source="id" disabled />
+            {/* <TextInput source="id" disabled /> */}
             <TextInput source="passport_ser" />
             <TextInput source="passport_id" />
             <TextInput source="country" />
@@ -23,7 +23,6 @@ export const AdminEdit: FC<EditProps> = (props) => (
 
             <ReferenceInput source="user_id" reference="User">
                 <SelectInput optionText={FullName} />
-                {/* <TextInput  /> */}
             </ReferenceInput>
 
         </SimpleForm>

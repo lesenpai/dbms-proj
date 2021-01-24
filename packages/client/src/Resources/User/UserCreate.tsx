@@ -10,7 +10,7 @@ export const UserCreate = (props) => (
                 <ImageField source='image_path' />
             </ImageInput>
             
-            <TextInput source='id' disabled autoFocus />
+            {/* <TextInput source='id' disabled autoFocus /> */}
             <TextInput source='login' />
             <TextInput source='password' />
             <TextInput source='surname' />

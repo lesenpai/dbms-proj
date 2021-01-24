@@ -17,10 +17,10 @@ export const ArticleEdit: FC<EditProps> = (props) => (
                 <ImageField source='image_path' />
             </ImageInput>
             
-            <TextInput source='id' disabled />
+            {/* <TextInput source='id' disabled /> */}
             {/* <TextInput source="date" /> */}
-            <DateInput source='date' />
             <TextInput source='title' />
+            <DateInput source='date' />
             <RichTextInput source='text' />
             <SelectInput source='status' choices={StatusList} />
             {/* <TextInput source='company_id' /> */}

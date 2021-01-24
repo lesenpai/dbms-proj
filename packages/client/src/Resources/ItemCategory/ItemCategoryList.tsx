@@ -38,6 +38,7 @@ export const ItemCategoryList = (props) => {
         <List
             exporter={false}
             perPage={25}
+            bulkActionButtons={false}
             {...props}
             //  filter={{parent_category_id: false}}
         >
@@ -46,7 +47,7 @@ export const ItemCategoryList = (props) => {
                 // rowClick='edit'
                 expand={<Expand />}
             >
-                <TextField source='id' />
+                {/* <TextField source='id' /> */}
                 <LinkToCategory />
                 <CheckRole permissions={getUserRole()} allowed={allowedRoles.edit}>
                     <EditButton />

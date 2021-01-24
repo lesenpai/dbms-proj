@@ -35,7 +35,7 @@ export const ItemCreate = (props) => {
     return (
         <Create {...props}>
             <SimpleForm>
-                <TextInput source='id' disabled autoFocus />
+                {/* <TextInput source='id' disabled autoFocus /> */}
                 <TextInput source='name' />
                 {/* <TextInput source='image_path' /> */}
                 <ImageInput source='new_photo' accept='image/*'>
@@ -43,8 +43,6 @@ export const ItemCreate = (props) => {
                 </ImageInput>
                 <TextInput source='props' />
                 <TextInput source='description' />
-                <TextInput source='category_id' />
-                <TextInput source='item_type_id' />
 
                 <ReferenceInput source='category_id' reference='ItemCategory'>
                     {/* <SelectInput optionText={ItemCategoryPreloader(dataProvider)} /> */}

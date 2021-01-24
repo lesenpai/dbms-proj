@@ -10,11 +10,6 @@ const Title = (props) => {
 export const Company2ItemEdit: FC<EditProps> = (props) => (
     <Edit title={<Title />} {...props}>
         <SimpleForm>
-            <ImageField source='image_path' />
-            {/* <AvatarField size='128' source="image_path"/> */}
-            <ImageInput source='new_photo' accept='image/*'>
-                <ImageField source='image_path' />
-            </ImageInput>
             
             {/* <TextInput source="id" disabled /> */}
             <ReferenceInput source='item_id' reference='Item'>

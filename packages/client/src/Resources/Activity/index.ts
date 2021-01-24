@@ -8,8 +8,8 @@ export const ActivityIcon = icon;
 
 export const allowedRoles = {
     list: [UserRole.ADMIN, UserRole.AGENT, UserRole.VISITOR],
-    create: [UserRole.ADMIN, UserRole.AGENT],
-    edit: [UserRole.ADMIN, UserRole.AGENT],
+    create: [UserRole.ADMIN],
+    edit: [UserRole.ADMIN],
     fields: [UserRole.ADMIN],
 };
 

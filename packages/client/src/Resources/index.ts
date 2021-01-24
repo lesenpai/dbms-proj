@@ -1,17 +1,18 @@
+export { companyResource } from './Company';
+export { company2itemResource } from './Company2Item';
+export { itemResource } from './Item';
+export { company2activityResource } from './Company2Activity';
+export { activityResource } from './Activity';
+export { articleResource } from './Article';
+export { openinghoursperiodResource } from './OpeningHoursPeriod';
+export { itemcategoryResource } from './ItemCategory';
+
+export { emailResource } from './Email';
+export { phoneResource } from './Phone';
+
+export { userResource } from './User';
 export { adminResource } from './Admin';
 export { agentResource } from './Agent';
-export { userResource } from './User';
+
 export { roleResource } from './Role';
-export { articleResource } from './Article';
-export { companyResource } from './Company';
-export { activityResource } from './Activity';
-export { company2activityResource } from './Company2Activity';
-export { company2itemResource } from './Company2Item';
-export { emailResource } from './Email';
-export { itemcategoryResource } from './ItemCategory';
 export { itemtypeResource } from './ItemType';
-// export { openinghoursperiodResource } from './OpeningHoursPeriod';
-export { itemResource } from './Item';
-export { phoneResource } from './Phone';
-export { workinghoursResource } from './WorkingHours';
-export { socialnetworkResource } from './SocialNetwork';

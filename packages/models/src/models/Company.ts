@@ -3,10 +3,9 @@ import type { Agent, AgentId } from './Agent';
 import type { Article, ArticleId } from './Article';
 import type { Company2Activity, Company2ActivityId } from './Company2Activity';
 import type { Company2Item, Company2ItemId } from './Company2Item';
-import type { Company2SocialNetwork, Company2SocialNetworkId } from './Company2SocialNetwork';
 import type { Email, EmailId } from './Email';
+import type { OpeningHoursPeriod, OpeningHoursPeriodId } from './OpeningHoursPeriod';
 import type { Phone, PhoneId } from './Phone';
-import type { WorkingHours, WorkingHoursId } from './WorkingHours';
 
 export interface CompanyAttributes {
   id: number;
@@ -87,18 +86,6 @@ export class Company extends Model<CompanyAttributes, CompanyCreationAttributes>
   hasCompany2Item!: Sequelize.HasManyHasAssociationMixin<Company2Item, Company2ItemId>;
   hasCompany2Items!: Sequelize.HasManyHasAssociationsMixin<Company2Item, Company2ItemId>;
   countCompany2Items!: Sequelize.HasManyCountAssociationsMixin;
-  // Company hasMany Company2SocialNetwork
-  Company2SocialNetworks!: Company2SocialNetwork[];
-  getCompany2SocialNetworks!: Sequelize.HasManyGetAssociationsMixin<Company2SocialNetwork>;
-  setCompany2SocialNetworks!: Sequelize.HasManySetAssociationsMixin<Company2SocialNetwork, Company2SocialNetworkId>;
-  addCompany2SocialNetwork!: Sequelize.HasManyAddAssociationMixin<Company2SocialNetwork, Company2SocialNetworkId>;
-  addCompany2SocialNetworks!: Sequelize.HasManyAddAssociationsMixin<Company2SocialNetwork, Company2SocialNetworkId>;
-  createCompany2SocialNetwork!: Sequelize.HasManyCreateAssociationMixin<Company2SocialNetwork>;
-  removeCompany2SocialNetwork!: Sequelize.HasManyRemoveAssociationMixin<Company2SocialNetwork, Company2SocialNetworkId>;
-  removeCompany2SocialNetworks!: Sequelize.HasManyRemoveAssociationsMixin<Company2SocialNetwork, Company2SocialNetworkId>;
-  hasCompany2SocialNetwork!: Sequelize.HasManyHasAssociationMixin<Company2SocialNetwork, Company2SocialNetworkId>;
-  hasCompany2SocialNetworks!: Sequelize.HasManyHasAssociationsMixin<Company2SocialNetwork, Company2SocialNetworkId>;
-  countCompany2SocialNetworks!: Sequelize.HasManyCountAssociationsMixin;
   // Company hasMany Email
   Emails!: Email[];
   getEmails!: Sequelize.HasManyGetAssociationsMixin<Email>;
@@ -111,6 +98,18 @@ export class Company extends Model<CompanyAttributes, CompanyCreationAttributes>
   hasEmail!: Sequelize.HasManyHasAssociationMixin<Email, EmailId>;
   hasEmails!: Sequelize.HasManyHasAssociationsMixin<Email, EmailId>;
   countEmails!: Sequelize.HasManyCountAssociationsMixin;
+  // Company hasMany OpeningHoursPeriod
+  OpeningHoursPeriods!: OpeningHoursPeriod[];
+  getOpeningHoursPeriods!: Sequelize.HasManyGetAssociationsMixin<OpeningHoursPeriod>;
+  setOpeningHoursPeriods!: Sequelize.HasManySetAssociationsMixin<OpeningHoursPeriod, OpeningHoursPeriodId>;
+  addOpeningHoursPeriod!: Sequelize.HasManyAddAssociationMixin<OpeningHoursPeriod, OpeningHoursPeriodId>;
+  addOpeningHoursPeriods!: Sequelize.HasManyAddAssociationsMixin<OpeningHoursPeriod, OpeningHoursPeriodId>;
+  createOpeningHoursPeriod!: Sequelize.HasManyCreateAssociationMixin<OpeningHoursPeriod>;
+  removeOpeningHoursPeriod!: Sequelize.HasManyRemoveAssociationMixin<OpeningHoursPeriod, OpeningHoursPeriodId>;
+  removeOpeningHoursPeriods!: Sequelize.HasManyRemoveAssociationsMixin<OpeningHoursPeriod, OpeningHoursPeriodId>;
+  hasOpeningHoursPeriod!: Sequelize.HasManyHasAssociationMixin<OpeningHoursPeriod, OpeningHoursPeriodId>;
+  hasOpeningHoursPeriods!: Sequelize.HasManyHasAssociationsMixin<OpeningHoursPeriod, OpeningHoursPeriodId>;
+  countOpeningHoursPeriods!: Sequelize.HasManyCountAssociationsMixin;
   // Company hasMany Phone
   Phones!: Phone[];
   getPhones!: Sequelize.HasManyGetAssociationsMixin<Phone>;
@@ -123,18 +122,6 @@ export class Company extends Model<CompanyAttributes, CompanyCreationAttributes>
   hasPhone!: Sequelize.HasManyHasAssociationMixin<Phone, PhoneId>;
   hasPhones!: Sequelize.HasManyHasAssociationsMixin<Phone, PhoneId>;
   countPhones!: Sequelize.HasManyCountAssociationsMixin;
-  // Company hasMany WorkingHours
-  WorkingHours!: WorkingHours[];
-  getWorkingHours!: Sequelize.HasManyGetAssociationsMixin<WorkingHours>;
-  setWorkingHours!: Sequelize.HasManySetAssociationsMixin<WorkingHours, WorkingHoursId>;
-  addWorkingHour!: Sequelize.HasManyAddAssociationMixin<WorkingHours, WorkingHoursId>;
-  addWorkingHours!: Sequelize.HasManyAddAssociationsMixin<WorkingHours, WorkingHoursId>;
-  createWorkingHour!: Sequelize.HasManyCreateAssociationMixin<WorkingHours>;
-  removeWorkingHour!: Sequelize.HasManyRemoveAssociationMixin<WorkingHours, WorkingHoursId>;
-  removeWorkingHours!: Sequelize.HasManyRemoveAssociationsMixin<WorkingHours, WorkingHoursId>;
-  hasWorkingHour!: Sequelize.HasManyHasAssociationMixin<WorkingHours, WorkingHoursId>;
-  hasWorkingHours!: Sequelize.HasManyHasAssociationsMixin<WorkingHours, WorkingHoursId>;
-  countWorkingHours!: Sequelize.HasManyCountAssociationsMixin;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof Company {
     Company.init({

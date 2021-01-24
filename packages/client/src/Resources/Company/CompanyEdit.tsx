@@ -11,12 +11,10 @@ const Title = (props) => {
 export const CompanyEdit: FC<EditProps> = (props) => (
     <Edit title={<Title />} {...props}>
         <SimpleForm>
-            <TextField source="image_path" />
-            {/* <ImageField source='image_path' /> */}
-            {/* <AvatarField size='128' source="image_path"/> */}
-            {/* <ImageInput source='new_photo' accept='image/*'>
+            <ImageField source='image_path' />
+            <ImageInput source='new_photo' accept='image/*'>
                 <ImageField source='image_path' />
-            </ImageInput> */}
+            </ImageInput>
 
             <TextInput source='id' disabled />
             <TextInput source='full_name' />

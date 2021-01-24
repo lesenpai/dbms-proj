@@ -6,9 +6,9 @@ import RichTextInput from 'ra-input-rich-text';
 export const ArticleCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="id" disabled autoFocus />
-            <DateInput source="date" />
+            {/* <TextInput source="id" disabled autoFocus /> */}
             <TextInput source="title" />
+            <DateInput source="date" />
             {/* <TextInput source="image_path" /> */}
             
             <ImageInput source='new_photo' accept='image/*'>
@@ -22,7 +22,6 @@ export const ArticleCreate = (props) => (
             </ReferenceInput> */}
             {/* <TextInput source="company_id" /> */}
             {/* <SelectInput source='status' choices={StatusList}/> */}
-            <StatusField/>
             <ReferenceInput source="company_id" reference="Company">
                 <SelectInput optionText="full_name" />
             </ReferenceInput>

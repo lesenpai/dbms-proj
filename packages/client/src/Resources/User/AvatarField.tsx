@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const AvatarField: FC<Props> = ({ record, size = '25', className, source }) => {
+const AvatarField: FC<Props> = ({ record, size = '40', className, source }) => {
     const classes = useStyles();
 
     return record ? (

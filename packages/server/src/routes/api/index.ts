@@ -23,8 +23,7 @@ import {
 } from '../../controllers';
 import { ItemController } from '../../controllers/Item.controller';
 import { userInfo } from 'os';
-import { SocialNetworkController } from '../../controllers/SocialNetwork.controller';
-import { WorkingHoursController } from '../../controllers/WorkingHours.controller';
+import { OpeningHoursPeriodController } from '../../controllers/OpeningHoursPeriod.controller';
 
 const router = Router();
 
@@ -49,9 +48,9 @@ router.use(
     crud(ActivityController, {
         // disabledActions: [Action.CREATE, Action.GET_LIST, Action.GET_ONE, Action.UPDATE, Action.DELETE],
         actions: {
-            [Action.CREATE]: [UserRole.ADMIN, UserRole.AGENT],
-            [Action.DELETE]: [UserRole.ADMIN, UserRole.AGENT],
-            [Action.UPDATE]: [UserRole.ADMIN, UserRole.AGENT],
+            [Action.CREATE]: [UserRole.ADMIN],
+            [Action.DELETE]: [UserRole.ADMIN],
+            [Action.UPDATE]: [UserRole.ADMIN],
         },
         defaultRoles
     })
@@ -241,22 +240,9 @@ router.use(
 );
 
 router.use(
-    '/socialnetwork',
+    '/openinghoursperiod',
     authType.required,
-    crud(SocialNetworkController, {
-        actions: {
-            [Action.CREATE]: [UserRole.ADMIN],
-            [Action.DELETE]: [UserRole.ADMIN],
-            [Action.UPDATE]: [UserRole.ADMIN],
-        },
-        defaultRoles
-    })
-);
-
-router.use(
-    '/workinghours',
-    authType.required,
-    crud(WorkingHoursController, {
+    crud(OpeningHoursPeriodController, {
         actions: {
             [Action.CREATE]: [UserRole.ADMIN],
             [Action.DELETE]: [UserRole.ADMIN],

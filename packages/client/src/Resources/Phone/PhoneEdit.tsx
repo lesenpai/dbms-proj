@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, EditProps } from 'react-admin';
-import StatusField from '../../components/StatusField';
+import StatusField, { StatusList } from '../../components/StatusField';
 
 const Title = (props) => {
     const { record } = props ?? { record: { name: 'None' } };
@@ -14,9 +14,8 @@ export const PhoneEdit: FC<EditProps> = (props) => (
             <TextInput source="number" />
             <TextInput source="description" />
             {/* <TextInput source="status" /> */}
-            <ReferenceInput source="status" reference="Company">
-                <SelectInput optionText="full_name" />
-            </ReferenceInput>
+            <SelectInput source='status' choices={StatusList} />
+
             {/* <TextInput source="company_id" /> */}
 
             <ReferenceInput source="company_id" reference="Company">

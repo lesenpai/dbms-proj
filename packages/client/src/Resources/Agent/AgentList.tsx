@@ -12,9 +12,11 @@ export const AgentList = (props) => {
                 <ReferenceField source='user_id' reference='User'>
                     <FullNameField />
                 </ReferenceField>
+
                 <ReferenceField source='company_id' reference='Company'>
                     <TextField source='full_name' />
                 </ReferenceField>
+                
                 <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
                     <EditButton />
                 </CheckRole>

@@ -59,7 +59,6 @@ const MyFilter: FC<Omit<FilterProps, 'children'>> = (props) => (
     </Filter>
 );
 
-//todo: добавить create
 const ListActions = (props) => {
     const { className, basePath, total, resource, currentSort /* , exporter */ } = props;
     return (
@@ -79,27 +78,27 @@ const ListActions = (props) => {
     );
 };
 
-const Aside = () => {
-    return (
-        <div style={{ width: 200, margin: '1em' }}>
-            <Typography variant="h6">Статистика отметок</Typography>
-            <Typography variant="body2">
-                Помещаемость: ...{/* ids.map((id) => data[id]).reduce((sum, post) => sum + post.views, 0) */}
-            </Typography>
-        </div>
-    );
-};
+// const Aside = () => {
+//     return (
+//         <div style={{ width: 200, margin: '1em' }}>
+//             <Typography variant="h6">Статистика отметок</Typography>
+//             <Typography variant="body2">
+//                 Помещаемость: ...{/* ids.map((id) => data[id]).reduce((sum, post) => sum + post.views, 0) */}
+//             </Typography>
+//         </div>
+//     );
+// };
 
 export const ArticleList = (props) => {
     return (
         <List
             {...props}
-            // exporter={exporter}
+            exporter={false}
             // aside={<Aside />}
             empty={<Empty />}
             sort={{ field: 'id', order: 'DESC' }}
             bulkActionButtons={false}
-            actions={<ListActions />}
+            // actions={<ListActions />}
             filters={<MyFilter context='button' />}
         >
             <Datagrid optimized rowClick='edit' expand={<Expand />}>
@@ -114,9 +113,6 @@ export const ArticleList = (props) => {
 
                 <TextField source='date' />
                 <StatusField />
-                {/* <CheckRole permissions={props.permissions} allowed={allowedRoles.edit} deny={<EditButton disabled />}>
-                    <EditButton />
-                </CheckRole> */}
                 <CheckRole permissions={getUserRole()} allowed={allowedRoles.edit}>
                     <EditButton />
                 </CheckRole>

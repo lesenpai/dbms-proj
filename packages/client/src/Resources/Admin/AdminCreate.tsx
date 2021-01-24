@@ -1,5 +1,6 @@
 import React from 'react';
 import { Create, ReferenceInput, SelectInput, SimpleForm, TextInput } from 'react-admin';
+import { FullName } from '../User/FullNameField';
 
 export const AdminCreate = (props) => (
     <Create {...props}>
@@ -12,11 +13,10 @@ export const AdminCreate = (props) => (
             <TextInput source="street" />
             <TextInput source="building" />
             <TextInput source="flat" />
-            <TextInput source="user_id" />
 
-            {/* <ReferenceInput source="user_id" reference="User">
-                <SelectInput optionText="name" />
-            </ReferenceInput> */}
+            <ReferenceInput source="user_id" reference="User">
+                <SelectInput optionText={FullName} />
+            </ReferenceInput>
 
         </SimpleForm>
     </Create>

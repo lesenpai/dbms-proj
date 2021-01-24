@@ -57,14 +57,14 @@ const customMessages = {
         WeekDay: {
             name: 'День недели',
             data: {
-                Monday: 'ПН',
-                Tuesday: 'ВТ',
-                Wednesday: 'СР',
-                Thursday: 'ЧТ',
-                Friday: 'ПТ',
-                Saturday: 'СБ',
-                Sunday: 'ВС',
-            }
+                MONDAY: 'ПН',
+                TUESDAY: 'ВТ',
+                WEDNESDAY: 'СР',
+                THURSDAY: 'ЧТ',
+                FRIDAY: 'ПТ',
+                SATURDAY: 'СБ',
+                SUNDAY: 'ВС',
+            },
         },
         Admin: {
             name: 'Администраторы',
@@ -162,36 +162,31 @@ const customMessages = {
             name: 'Категории продуктов',
             fields: {
                 name: 'Название',
-                parent_category_id: 'Родительская категория'
-            }
+                parent_category_id: 'Родительская категория',
+            },
         },
         Company2Activity: {
             name: 'Виды деят. компаний',
             fields: {
                 activity_id: 'Вид дейтельности',
-                company_id: 'Компания'
-            }
+                company_id: 'Компания',
+            },
         },
         ItemType: {
             name: 'Тип продукта',
             fields: {
-                name: 'Название'
-            }
-        },
-        SocialNetwork: {
-            name: 'Соцсети',
-            fields: {
                 name: 'Название',
-                image_path: 'Логотип'
-            }
+            },
         },
-        WorkingHours: {
-            name: 'График работы',
+        OpeningHoursPeriod: {
+            name: 'Часы работы',
             fields: {
+                first_day_id: 'Первый день',
+                last_day_id: 'Последний день',
                 start_time: 'Открытие',
                 end_time: 'Закрытие',
-                short_day_end_time: 'Закрытие (сокращенный день)',
                 company_id: 'Компания',
+                status: 'Статус'
             }
         },
     },

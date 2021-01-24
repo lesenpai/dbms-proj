@@ -27,7 +27,13 @@ const MyFilter: FC<Omit<FilterProps, 'children'>> = (props) => (
 
 export const UserList = (props) => {
     return (
-        <List {...props} exporter={false} perPage={25} bulkActionButtons={false} filters={<MyFilter context='button' />}>
+        <List
+            {...props}
+            exporter={false}
+            perPage={25}
+            bulkActionButtons={false}
+            filters={<MyFilter context='button' />}
+        >
             <Datagrid optimized rowClick='edit'>
                 {/* <TextField source='id' /> */}
                 <FullNameField label='ФИО' />
