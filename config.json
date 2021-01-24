@@ -1,0 +1,10 @@
+{
+    "port": 80,
+    "jwtSecret": "krxmh1ia2e",
+    "db": {
+      "host": "localhost",
+      "user": "sofia",
+      "password": "root",
+      "database": "info_agency_sofi"
+    }
+  } 
